@@ -1,0 +1,87 @@
+.register > img {
+    display: block;
+    margin-top: 10vh;
+    margin-left: auto;
+    margin-right: auto;
+    height: 70vh;
+    border-radius: 10px;
+}
+
+.register > .registerh {
+    background: transparent;
+    padding: 1vh;
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+}
+
+.register > form {
+    background: transparent;
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -55%);
+}
+
+.register > form > div {
+    background: transparent;
+    display: flex;
+}
+
+.register > form > div > div {
+    background: transparent;
+}
+
+.register > form > div > div > .registerft {
+    background: transparent;
+    margin: 2vh;
+}
+
+.register > form > div > div > .registerfi {
+    border: none;
+    background-color: #111111;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 2vh;
+}
+
+.register > form > div > div > .registerfi:hover {
+    cursor: auto;
+}
+
+.register > form > div > div > .registerftcp {
+    background: transparent;
+    margin: 2vh;
+    top: 0%;
+}
+
+.register > form > div > div > .registerficp {
+    border: none;
+    background-color: #111111;
+    border-radius: +10px;
+    padding: 15px;
+    margin: 2vh;
+    top: 0%;
+    
+}
+
+.register > form > div > div > .registerficp:hover {
+    cursor: auto;
+}
+
+.register > form > .registerfb {
+    border: none;
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 15px;
+    margin-left: 32vh;
+}
+
+.register > form > .registerfb:hover {
+    border: none;
+    background-color: #111111;
+    border-radius: 10px;
+    padding: 15px;
+    margin-left: 32vh;
+}

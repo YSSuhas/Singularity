@@ -1,0 +1,15 @@
+.navbar {
+    border-bottom: #111111 solid;
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 10vh;
+}
+
+.navbar > .navbarbox > .navbarcontainer > .navbarnavbar > .mr-auto > .navlink {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.navbar > .navbarbox > .navbarcontainer > .navbarnavbar > .navbarsearch {
+    float: right;
+}

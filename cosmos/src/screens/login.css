@@ -1,0 +1,58 @@
+.login > img {
+    display: block;
+    margin-top: 10vh;
+    margin-left: auto;
+    margin-right: auto;
+    height: 70vh;
+    border-radius: 10px;
+}
+
+.login > .loginh {
+    background: transparent;
+    padding: 1vh;
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+}
+
+.login > form {
+    background: transparent;
+    position: absolute;
+    top: 45%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+}
+
+.login > form > .loginft {
+    background: transparent;
+    margin: 2vh;
+}
+
+.login > form > .loginfi {
+    border: none;
+    background-color: #111111;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 2vh;
+}
+
+.login > form > .loginfi:hover {
+    cursor: auto;
+}
+
+.login > form > .loginfb {
+    border: none;
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 15px;
+    margin-left: 13vh;
+}
+
+.login > form > .loginfb:hover {
+    border: none;
+    background-color: #111111;
+    border-radius: 10px;
+    padding: 15px;
+    margin-left: 13vh;
+}

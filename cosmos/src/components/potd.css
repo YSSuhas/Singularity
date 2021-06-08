@@ -1,0 +1,46 @@
+.potd {
+    margin-top: 15vh;
+}
+
+.potd > .potdc > h3 {
+    text-align: center;
+}
+
+.potd > .potdc > .potdimg {
+    margin-top: 4vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.potd > .potdc > .potdimgclick {
+    margin-top: 4vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    opacity: 0.5;
+}
+
+.potd > .potdc > .potdd > .potdp {
+    background: transparent;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.potd > .potdc > .potdd > .potdt {
+    background: transparent;
+    position: absolute;
+    top: 30%;
+    left: 30%;
+}
+
+.potd > .potdc > .potdd > .potdc {
+    background: transparent;
+    position: absolute;
+    bottom: 1%;
+    left: 30%;
+}
