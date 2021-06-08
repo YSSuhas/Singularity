@@ -21,7 +21,7 @@ export const registerAction = ( mailid , password , username ) => async(dispatch
             }
         }
 
-        const { data } = axios.post(
+        const { data } = await axios.post(
             '/api/users/register',
             { mailid , password , username },
             config
