@@ -3,6 +3,7 @@ const asyncHandler = require('express-async-handler');
 const User = require('../database/schemas/userschema');
 const gettoken = require('../jwtokens/gettoken');
 const bodyParser = require('body-parser');
+const sendmail = require('../mailjet/sendmail')
 
 const router = express.Router();
 
@@ -29,6 +30,8 @@ router.post(
             throw new Error("Username already exists");
         }
 
+        sendmail(mailid,username);
+
         const user = new User({
             "mailid": mailid,
             "password": password,
@@ -51,6 +54,33 @@ router.post(
         }
 
     } )
+)
+
+router.post(
+
+    '/login',
+
+    asyncHandler( async ( req , res ) => {
+
+        const { mailid , password } = req.body;
+        const user = await User.findOne({ mailid });
+
+        if( user && ( user.matchPassword( password ) ) ) {
+            res.json({
+                _id: user._id,
+                mailid: user.mailid,
+                password: user.password,
+                token: gettoken(user._id)
+            })
+        }
+
+        else {
+            res.status(401);
+            throw new Error("Invalid User");
+        }
+
+    } )
+
 )
 
 module.exports = router;

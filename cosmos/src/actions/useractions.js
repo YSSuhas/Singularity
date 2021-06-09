@@ -56,12 +56,12 @@ export const loginAction = ( emailid , password ) => async(dispatch) => {
         
         const config = {
             headers: {
-                "Content-type": "application/json"
+                "Content-Type": "application/json"
             }
         }
 
-        const { data } = axios.post(
-            '/api/users/',
+        const { data } = await axios.post(
+            '/api/users/login',
             { emailid , password },
             config
         )
@@ -71,7 +71,7 @@ export const loginAction = ( emailid , password ) => async(dispatch) => {
             payload: data
         })
 
-        localStorage.setItem('userInfo' , JSON.stringify(data))
+        localStorage.setItem('userInfo' , JSON.stringify(data));
 
     } catch (error) {
         

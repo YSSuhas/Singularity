@@ -12,8 +12,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          <Route path={"/home"} component={Home}/>
-          <Route path={"/"} component={Register} />
+          <Route exact path={"/"} component={Home}/>
+          <Route path={"/register"} component={Register} />
+          <Route path={"/login"} component={Login} />
         </Switch>
       </BrowserRouter>
         {/*<Navbars />

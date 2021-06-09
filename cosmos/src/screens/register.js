@@ -2,6 +2,7 @@ import React , { useState , useEffect } from 'react'
 import './register.css'
 import { registerAction } from '../actions/useractions'
 import { useSelector , useDispatch } from 'react-redux'
+import Message from '../components/message'
 
 function Register( { history } ) {
 
@@ -9,28 +10,50 @@ function Register( { history } ) {
     const [ password , setPassword ] = useState('');
     const [ username , setUsername ] = useState('');
     const [ confirmpassword , setConfirmpassword ] = useState('');
+    const [ alertmistake , setAlertmistake ] = useState(false);
+    const [ message , setMessage ] = useState('');
 
-    const redirect = '/home';
+    const redirect = '/';
 
     const dispatch = useDispatch();
 
-    const register = useSelector(state => state.register);
+    const register = useSelector(state => state.login);
 
     const { loading , error , userInfo } = register;
 
     useEffect(() => {
         if(userInfo) {
-            history.push(redirect);
+            history.push('/');
         }
-    }, [ userInfo , history , redirect ])
+    }, [ history , userInfo , dispatch ])
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if( password !== confirmpassword ) {
-            alert("Passwords do not match");
+        var cap=0,low=0,num=0;
+        for( var i=0 ; i<password.length ; i++ ) {
+            if( password[i] >= '0' && password[i] <= '9' ) {
+                num++;
+            }
+            else if( password[i] == password[i].toUpperCase() ) {
+                cap++;
+            }
+            else if( password[i] == password[i].toLowerCase() ) {
+                low++;
+            }
+        }
+        if( ( password.length > 7 && cap > 0 ) && ( low > 0 && num > 0 ) ) {
+            if( password !== confirmpassword ) {
+                setAlertmistake(true);
+                setMessage("Passwords do not match");
+            }
+            else {
+                dispatch( registerAction ( mailid , password , username ) );
+            }
         }
         else {
-            dispatch( registerAction ( mailid , password , username ) );
+            setAlertmistake(true);
+            alert(password.length + " " + cap + " " + low + " " + num);
+            setMessage("Password should atleast contain a capital letter, a lower letter and a number");
         }
     }
 
@@ -62,6 +85,9 @@ function Register( { history } ) {
                 <h1></h1>
                 <button className="registerfb" type="submit">Get In</button>
             </form>
+            <div className="registerm">
+                { alertmistake && <Message type="error" message={message}></Message> }
+            </div>
         </div>
     )
 }

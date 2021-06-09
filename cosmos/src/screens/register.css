@@ -63,7 +63,6 @@
     padding: 15px;
     margin: 2vh;
     top: 0%;
-    
 }
 
 .register > form > div > div > .registerficp:hover {
@@ -84,4 +83,8 @@
     border-radius: 10px;
     padding: 15px;
     margin-left: 32vh;
+}
+
+.register > .registerm {
+    margin-left: 50vh;
 }

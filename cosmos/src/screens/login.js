@@ -1,17 +1,36 @@
 import React , { useState , useEffect } from 'react'
+import { loginAction } from '../actions/useractions'
+import { useDispatch , useSelector } from 'react-redux'
 import './login.css'
-import MailIcon from '@material-ui/icons/Mail'
 
-function Login() {
+function Login({ history }) {
 
     const [ mailid , setMailid ] = useState('');
     const [ password , setPassword ] = useState('');
+
+    const redirect = '/';
+
+    const dispatch = useDispatch();
+
+    const login = useSelector( state => state.login );
+    const { loading , error , userInfo } = login;
+    
+    useEffect( () => {
+        if(userInfo) {
+            history.push(redirect);
+        }
+    } , [ userInfo , history , redirect ] )
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch( loginAction ( mailid , password ) );
+    }
 
     return (
         <div className="login">
             <img src="https://ik.imagekit.io/yssuhas/Singularity/BH_jYxtc2dFS.jpg"/>
             <h5 className="loginh">Welcome back</h5>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <h6 className="loginft">Enter your EMail ID</h6>
                 <input className="loginfi" placeholder="example@example.com" value={mailid} onChange={ (e) => setMailid(e.target.value) }></input>
                 <h6 className="loginft">Enter your Password</h6>
