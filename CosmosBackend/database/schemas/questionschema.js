@@ -1,23 +1,22 @@
 const mongoose = require('mongoose');
 const User = require('./userschema');
-const Blog = require('./blogschema');
 const Star = require('./starschema');
+const Answer = require('./answerschema');
 
-const commentSchema = mongoose.Schema(
+const questionSchema = mongoose.Schema(
     {
-        blog: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Blog',
-            required: true
-        },
-        usercommented: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        },
-        description: {
+        statement: {
             type: String,
             required: true
         },
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        },
+        answers: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Answer'
+        }],
         stars: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Star'
@@ -28,6 +27,6 @@ const commentSchema = mongoose.Schema(
     }
 )
 
-const Comment = mongoose.model('Comment' , commentSchema);
+const Question = mongoose.model('Question' , questionSchema);
 
-module.exports = Comment
+module.exports = Question

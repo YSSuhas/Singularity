@@ -17,7 +17,7 @@ function Register( { history } ) {
 
     const dispatch = useDispatch();
 
-    const register = useSelector(state => state.login);
+    const register = useSelector(state => state.register);
 
     const { loading , error , userInfo } = register;
 
@@ -25,6 +25,7 @@ function Register( { history } ) {
         if(userInfo) {
             history.push('/');
         }
+        document.title("REGISTER | SINGULARITY");
     }, [ history , userInfo , dispatch ])
 
     const handleSubmit = (e) => {
@@ -52,7 +53,6 @@ function Register( { history } ) {
         }
         else {
             setAlertmistake(true);
-            alert(password.length + " " + cap + " " + low + " " + num);
             setMessage("Password should atleast contain a capital letter, a lower letter and a number");
         }
     }

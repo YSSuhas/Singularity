@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './home.css'
-import Potd from '../components/potd'
 import Navbars from '../components/navbar'
 
 function Home() {
+
+    useEffect( () => {
+        document.title = "SINGULARITY"
+    } , [])
+
     return (
         <div className="Home">
             <Navbars />

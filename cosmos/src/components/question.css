@@ -1,0 +1,46 @@
+.question {
+    margin-top: 7vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.question > div {
+    border: solid #111111;
+    border-radius: 10px;
+}
+
+.question > div > h5 {
+    margin: 2vh;
+    padding: 1vh;
+}
+
+.question > div > form {
+    padding: 2vh;
+}
+
+.question > div > form > textarea {
+    height: 60%;
+    width: 100%;
+    resize: none;
+    border: none;
+    background-color: #111111;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.question > div > form > button {
+    border: none;
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 15px;
+    margin-left: 80%;
+}
+
+.question > div > form > button:hover {
+    border: none;
+    background-color: #111111;
+    border-radius: 10px;
+    padding: 15px;
+    margin-left: 80%;
+}

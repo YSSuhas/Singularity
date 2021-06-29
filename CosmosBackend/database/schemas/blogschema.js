@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const User = require('./userschema');
 const Comment = require('./commentschema');
+const Star = require('./starschema');
 
-const postSchema = mongoose.Schema(
+const blogSchema = mongoose.Schema(
     {
         subject: {
             type: String,
@@ -18,7 +19,7 @@ const postSchema = mongoose.Schema(
         },
         stars: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
+            ref: 'Star'
         }],
         comments: [{
             type: mongoose.Schema.Types.ObjectId,
@@ -30,6 +31,6 @@ const postSchema = mongoose.Schema(
     }
 )
 
-const Post = mongoose.model('Post' , postSchema);
+const Blog = mongoose.model('Blog' , blogSchema);
 
-module.exports = Post
+module.exports = Blog

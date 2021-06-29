@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const Post = require('./postschema');
+const Blog = require('./blogschema');
+const Question = require('./questionschema');
 
 const userSchema = mongoose.Schema(
     {
@@ -20,10 +21,12 @@ const userSchema = mongoose.Schema(
             type: String,
             default: "https://ik.imagekit.io/yssuhas/Singularity/Empty_profile_Am3uV5q6A.jfif"
         },
+        description: {
+            type: String
+        },
         isAdmin: {
             type: Boolean,
-            default: false,
-            required: true
+            default: false
         },
         followers: [{
             type: mongoose.Schema.Types.ObjectId,
@@ -33,9 +36,33 @@ const userSchema = mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         }],
-        stars: [{
+        blogs: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Post'
+            ref: 'Blog'
+        }],
+        starredquestions: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Star'
+        }],
+        starredanswers: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Star'
+        }],
+        starredblogs: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Star'
+        }],
+        starredcomments: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Star'
+        }],
+        questions: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Question'
+        }],
+        answers: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Answer'
         }]
     },
     {

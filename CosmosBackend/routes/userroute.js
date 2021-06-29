@@ -3,7 +3,8 @@ const asyncHandler = require('express-async-handler');
 const User = require('../database/schemas/userschema');
 const gettoken = require('../jwtokens/gettoken');
 const bodyParser = require('body-parser');
-const sendmail = require('../mailjet/sendmail')
+const sendmail = require('../mailjet/sendmail');
+const { protect } = require('../middleware/authmw');
 
 const router = express.Router();
 
@@ -18,7 +19,7 @@ router.post(
         const { mailid , password , username } = req.body;
         
         const mailidExists = await User.findOne( { mailid } );
-        const usernameExists = await User.findOne( { username } ); 
+        const usernameExists = await User.findOne( { 'username': username } ); 
 
         if(mailidExists) {
             res.status(400);
@@ -44,6 +45,7 @@ router.post(
                 _id: user._id,
                 mailid: user.mailid,
                 password: user.password,
+                username: user.username,
                 token: gettoken(user._id)
             })
         }
@@ -70,6 +72,7 @@ router.post(
                 _id: user._id,
                 mailid: user.mailid,
                 password: user.password,
+                username: user.username,
                 token: gettoken(user._id)
             })
         }
@@ -78,6 +81,21 @@ router.post(
             res.status(401);
             throw new Error("Invalid User");
         }
+
+    } )
+
+)
+
+router.get(
+
+    '/:username',
+    protect,
+
+    asyncHandler( async ( req , res ) => {
+
+        const user = await User.findOne({ 'username': req.params.username }).populate('questions').populate('answers');
+
+        res.json(user);
 
     } )
 

@@ -6,16 +6,41 @@ import { Container } from '@material-ui/core'
 import Search from './search'
 
 function Navbars() {
+
+    const user = JSON.parse(localStorage.getItem('userInfo'));
+
+    /*if(user) {
+        var usernameind = user.lastIndexOf(",\"username\"") + 13;
+        var i = 0;
+        var username = "";
+        while(i<11) {
+            if(user[usernameind]=='"')
+                break;
+            username+=user[usernameind];
+            usernameind++;
+            i++;
+        }
+    }*/
+
     return (
         <div className="navbars">
             <Container className="navbarcontainer">
                 <Navbar bg="black" variant="dark" className="navbarnavbar" fixed="top">
-                    <Navbar.Brand href="#home">YS</Navbar.Brand>
+                    <Navbar.Brand href="/">YS</Navbar.Brand>
                     <Nav className="mr-auto">
-                        <Nav.Link href="#home" className="navlink">Home</Nav.Link>
-                        <Nav.Link href="#features" className="navlink">Features</Nav.Link>
-                        <Nav.Link href="#pricing" className="navlink">Pricing</Nav.Link>
+                        <Nav.Link href="/picture_of_the_day" className="navlink">POTD</Nav.Link>
+                        <Nav.Link href="/questions" className="navlink">QNA</Nav.Link>
                     </Nav>
+                    { user ? (
+                        <Nav className="navbaru">
+                            <Nav.Link href={`${user.username}/profile`}>{user.username}</Nav.Link>
+                        </Nav>
+                    ) : (
+                        <Nav className="navbaru">
+                            <Nav.Link href="/login">Log In</Nav.Link>
+                            <Nav.Link href="/register">Register</Nav.Link>
+                        </Nav>
+                    ) }
                     <Nav className="navbarsearch">
                         <Search />
                     </Nav>

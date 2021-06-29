@@ -2,6 +2,7 @@ import React , { useState , useEffect } from 'react'
 import axios from 'axios'
 import './potd.css'
 import { Container } from '@material-ui/core';
+import Loader from './loader';
 
 function Potd() {
 
@@ -10,6 +11,7 @@ function Potd() {
     const [ description , setDescription ] = useState('');
     const [ copyright , setCopyright ] = useState('');
     const [ clicked , setClicked ] = useState(false);
+    const [ loading , setLoading ] = useState(true);
     const { REACT_APP_NASAApi } = process.env;
 
     useEffect(() => {
@@ -19,10 +21,9 @@ function Potd() {
             setDescription(data.explanation);
             setTitle(data.title);
             setCopyright(data.copyright);
-            const { back } = await axios.get(`/api/users/`);
-            console.log(back);
         }
         getData();
+        setLoading(false);
     }, []);
 
     const desc = (e) => {
@@ -32,6 +33,7 @@ function Potd() {
 
     return (
         <div className="potd">
+            { loading && <Loader /> }
             <Container className="potdc">
                 <h3>Pic of the day</h3>
                 <img src={`${picurl}`} className={`potdimg ${clicked && 'potdimgclick'}`} onClick={desc}></img>

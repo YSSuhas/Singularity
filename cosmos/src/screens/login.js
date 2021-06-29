@@ -17,9 +17,10 @@ function Login({ history }) {
     
     useEffect( () => {
         if(userInfo) {
-            history.push(redirect);
+            history.push("/");
         }
-    } , [ userInfo , history , redirect ] )
+        document.title = "Login > SINGULARITY"
+    } , [ userInfo , history , dispatch] )
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -32,9 +33,9 @@ function Login({ history }) {
             <h5 className="loginh">Welcome back</h5>
             <form onSubmit={handleSubmit}>
                 <h6 className="loginft">Enter your EMail ID</h6>
-                <input className="loginfi" placeholder="example@example.com" value={mailid} onChange={ (e) => setMailid(e.target.value) }></input>
+                <input className="loginfi" placeholder="example@example.com" type="email" value={mailid} onChange={ (e) => setMailid(e.target.value) }></input>
                 <h6 className="loginft">Enter your Password</h6>
-                <input className="loginfi" placeholder="PA$$w0rd" value={password} onChange={ (e) => setPassword(e.target.value) }></input>
+                <input className="loginfi" placeholder="PA$$w0rd" type="password" value={password} onChange={ (e) => setPassword(e.target.value) }></input>
                 <h1></h1>
                 <button className="loginfb" type="submit">Get In</button>
             </form>
