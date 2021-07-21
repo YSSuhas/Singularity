@@ -1,0 +1,17 @@
+.typechat {
+    margin-left: 4%;
+    margin-right: auto;
+    width: 71%;
+    word-wrap: break-word;
+    padding: 3px;
+    position: fixed;
+    bottom: 1vh;
+}
+
+.typechat > form {
+    display: flex;
+}
+
+.typechat > form > textarea {
+    resize: none;
+}

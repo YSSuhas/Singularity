@@ -23,7 +23,7 @@ router.post(
 
         if(mailidExists) {
             res.status(400);
-            throw new Error("User with this mail id already exists")
+            throw new Error("User with this mail id already exists");
         }
         
         if(usernameExists) {
@@ -42,10 +42,9 @@ router.post(
 
         if(user) {
             res.status(201).json({
-                _id: user._id,
-                mailid: user.mailid,
-                password: user.password,
+                id: user._id,
                 username: user.username,
+                profilepic: user.profilepic,
                 token: gettoken(user._id)
             })
         }
@@ -69,10 +68,9 @@ router.post(
 
         if( user && ( user.matchPassword( password ) ) ) {
             res.json({
-                _id: user._id,
-                mailid: user.mailid,
-                password: user.password,
+                id: user._id,
                 username: user.username,
+                profilepic: user.profilepic,
                 token: gettoken(user._id)
             })
         }
@@ -93,9 +91,81 @@ router.get(
 
     asyncHandler( async ( req , res ) => {
 
-        const user = await User.findOne({ 'username': req.params.username }).populate('questions').populate('answers');
+        const user = await User.findById(req.user).populate('questions').populate({
+            path: 'answers',
+            populate: {
+                path: 'question',
+                populate: {
+                    path: 'user',
+                    model: 'User'
+                }
+            }
+        }).populate({
+            path: 'starredquestions',
+            populate: {
+                path: 'question',
+                populate: {
+                    path: 'user',
+                    model: 'User'
+                }
+            }
+        }).populate({
+            path: 'starredanswers',
+            populate: {
+                path: 'answer',
+                populate: {
+                    path: 'question',
+                    populate: {
+                        path: 'user',
+                        model: 'User'
+                    }
+                }
+            }
+        });
 
         res.json(user);
+
+    } )
+
+)
+
+router.put(
+
+    '/',
+    protect,
+
+    asyncHandler( async( req , res ) => {
+
+        const { mailid , username , profilepic , description } = req.body;
+
+        const user = await User.findById(req.user);
+
+        if(user) {
+        
+            user.mailid = mailid || user.mailid;
+            user.username = username || user.username;
+            user.profilepic = profilepic || user.profilepic;
+            user.description = description || user.description;
+
+            const updateUser = await user.save();
+
+            sendmail(updateUser.mailid,updateUser.username);
+
+            res.json({
+                id: updateUser._id,
+                username: updateUser.username,
+                profilepic: updatedUser.profilepic,
+                token: gettoken(updateUser._id)
+            })
+        
+        }
+
+        else {
+
+            res.status(401);
+            throw new Error("User not found");
+        
+        }
 
     } )
 

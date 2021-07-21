@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('./userschema');
 const Blog = require('./blogschema');
-const Star = require('./starschema');
+//const Star = require('./starquestionschema');
 
 const commentSchema = mongoose.Schema(
     {
@@ -17,11 +17,11 @@ const commentSchema = mongoose.Schema(
         description: {
             type: String,
             required: true
-        },
-        stars: [{
+        }
+        /*stars: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Star'
-        }]
+        }]*/
     },
     {
         timestamps: true

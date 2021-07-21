@@ -17,9 +17,14 @@ function Allquestions( { history } ) {
         document.title = "Questions > SINGULARITY";
     } , [ dispatch ])
 
+    const clickHandler = () => {
+        history.push('/ask_question');
+    }
+
     return (
         <div className="allquestions">
             <Navbars />
+            <button onClick={clickHandler}>Ask question</button>
             { questions && questions.map(question => {
 
                 if(question.statement.length>100) {

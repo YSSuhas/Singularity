@@ -17,7 +17,7 @@ function Potd() {
     useEffect(() => {
         const getData = async () => {
             const { data } = await axios.get(`https://api.nasa.gov/planetary/apod?api_key=${REACT_APP_NASAApi}`);
-            setPicurl(data.hdurl);
+            setPicurl(data.url);
             setDescription(data.explanation);
             setTitle(data.title);
             setCopyright(data.copyright);
@@ -25,7 +25,7 @@ function Potd() {
         getData();
         setLoading(false);
     }, []);
-
+    console.log(picurl);
     const desc = (e) => {
         e.preventDefault();
         setClicked(!clicked);

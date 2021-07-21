@@ -4,20 +4,33 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import {
     loginReducer,
     registerReducer,
+    updateprofileReducer,
     viewprofileReducer
 } from './reducers/userreducers'
 import {
     askquestionReducer,
     allquestionsReducer,
-    viewquestionReducer
+    viewquestionReducer,
+    deletequestionReducer,
+    searchquestionReducer
 } from './reducers/questionreducers'
 import {
     addanswerReducer,
-    viewanswersReducer
+    viewanswersReducer,
+    deleteanswerReducer
 } from './reducers/answerreducers'
 import { 
-    addstarReducer, seestarReducer 
+    addstarquestionReducer, 
+    seestarquestionReducer,
+    removestarquestionReducer,
+    addstaranswerReducer, 
+    seestaranswerReducer,
+    removestaranswerReducer
 } from './reducers/starreducers'
+import { 
+    addchatReducer,
+    seechatReducer 
+} from './reducers/chatreducers'
 
 const reducer = combineReducers({
     login                        : loginReducer,
@@ -28,8 +41,18 @@ const reducer = combineReducers({
     addanswer                    : addanswerReducer,
     viewanswers                  : viewanswersReducer,
     viewprofile                  : viewprofileReducer,
-    addstar                      : addstarReducer,
-    seestar                      : seestarReducer
+    addstarquestion              : addstarquestionReducer,
+    seestarquestion              : seestarquestionReducer,
+    removestarquestion           : removestarquestionReducer,
+    deletequestion               : deletequestionReducer,
+    addstaranswer                : addstaranswerReducer,
+    seestaranswer                : seestaranswerReducer,
+    removestaranswer             : removestaranswerReducer,
+    deleteanswer                 : deleteanswerReducer,
+    updateprofile                : updateprofileReducer,
+    addchat                      : addchatReducer, 
+    seechat                      : seechatReducer,
+    searchquestion               : searchquestionReducer
 })
 
 const middleware = [ thunk ]

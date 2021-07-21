@@ -5,8 +5,10 @@ const Question = require('../database/schemas/questionschema');
 const Comment = require('../database/schemas/commentschema');
 const Blog = require('../database/schemas/blogschema');
 const User = require('../database/schemas/userschema');
-const Star = require('../database/schemas/starschema');
+const Starquestion = require('../database/schemas/starquestionschema');
 const bodyParser = require('body-parser');
+const { protect, isstarqauthor , isstaraauthor } = require('../middleware/authmw');
+const Staranswer = require('../database/schemas/staranswerschema');
 
 const router = express.Router();
 
@@ -14,138 +16,48 @@ router.use(bodyParser.urlencoded({extended: true}));
 
 router.post(
 
-    '/',
+    '/questions',
+    protect,
 
     asyncHandler ( async(req,res) => {
 
-        const { user , question , answer , blog , comment } = req.body;
+        const { question } = req.body;
 
-        if(question!="undefined") {
+        const starquestionExists = await Starquestion.findOne( { "user": req.user , "question": question } );
 
-            const star = new Star({
-                "user": user,
-                "question": question
-            })
-
-            Question.update({_id: question},{$push: {stars: star._id }},{upsert:true},function(err){
-                if(err){
-                        console.log(err);
-                }else{
-                        console.log("Successfully added");
-                }
-            });
-
-            User.update({_id: user},{$push: {starredquestions: star._id }},{upsert:true},function(err){
-                if(err){
-                        console.log(err);
-                }else{
-                        console.log("Successfully added");
-                }
-            });
-
-            await star.save();
-
-            res.status(201);
-            res.json({
-                _id: star._id
-            });
-
+        if(starquestionExists) {
+            res.status(400);
+            throw new Error("Already Starred");
         }
 
-        else if(answer!="undefined") {
+        const starquestion = new Starquestion({
+            "user" : req.user,
+            "question" : question
+        });
 
-            const star = new Star({
-                "user": user,
-                "answer": answer
-            })
+        User.update({_id: req.user},{$push: {starredquestions: starquestion._id }},{upsert:true},function(err){
+            if(err){
+                    console.log(err);
+            }else{
+                    console.log("Successfully added");
+            }
+        });
 
-            Answer.update({_id: answer},{$push: {stars: star._id }},{upsert:true},function(err){
-                if(err){
-                        console.log(err);
-                }else{
-                        console.log("Successfully added");
-                }
-            });
+        Question.update({_id: question},{$push: {stars: starquestion._id }},{upsert:true},function(err){
+            if(err){
+                    console.log(err);
+            }else{
+                    console.log("Successfully added");
+            }
+        });
 
-            User.update({_id: user},{$push: {starredanswers: star._id }},{upsert:true},function(err){
-                if(err){
-                        console.log(err);
-                }else{
-                        console.log("Successfully added");
-                }
-            });
+        await starquestion.save();
 
-            await star.save();
-
-            res.status(201);
+        if(starquestion) {
+            res.status(200);
             res.json({
-                _id: star._id
-            });
-
-        }
-
-        else if(blog!="undefined") {
-
-            const star = new Star({
-                "user": user,
-                "blog": blog
+                id : starquestion._id 
             })
-
-            Blog.update({_id: blog},{$push: {stars: star._id }},{upsert:true},function(err){
-                if(err){
-                        console.log(err);
-                }else{
-                        console.log("Successfully added");
-                }
-            });
-
-            User.update({_id: user},{$push: {starredblogs: star._id }},{upsert:true},function(err){
-                if(err){
-                        console.log(err);
-                }else{
-                        console.log("Successfully added");
-                }
-            });
-
-            await star.save();
-
-            res.status(201);
-            res.json({
-                _id: star._id
-            });
-
-        }
-
-        else if(comment!="undefined") {
-
-            const star = new Star({
-                "user": user,
-                "comment": comment
-            })
-
-            Comment.update({_id: comment},{$push: {stars: star._id }},{upsert:true},function(err){
-                if(err){
-                        console.log(err);
-                }else{
-                        console.log("Successfully added");
-                }
-            });
-
-            User.update({_id: user},{$push: {starredcomments: star._id }},{upsert:true},function(err){
-                if(err){
-                        console.log(err);
-                }else{
-                        console.log("Successfully added");
-                }
-            });
-
-            await star.save();
-
-            res.status(201);
-            res.json({
-                _id: star._id
-            });
-
         }
 
     })
@@ -154,44 +66,17 @@ router.post(
 
 router.get(
 
-    '/',
+    '/questions/:id',
+    protect,
+    isstarqauthor,
 
     asyncHandler( async(req,res) => {
 
-        const { user , question , answer , blog , comment } = req.query;
-        console.log("U "+ user);
+        const starquestion = await Starquestion.findById(req.starquestion);
 
-        if(question!="undefined") {
-
-            const starred = await Star.find({ 'user': user , 'question': question }).exec();
-            
-            res.json(starred);
-
-        }
-
-        else if(answer!="undefined") {
-
-            const starred = await Star.find({ "user": user , "answer": answer });
-            
-            res.json(starred);
-
-        }
-
-        else if(blog!="undefined") {
-
-            const starred = await Star.findOne({ "user": user , "blog": blog });
-            
-            res.json(starred);
-
-        }
-
-        else if(comment!="undefined") {
-
-            const starred = await Star.findOne({ "user": user , "comment": comment });
-            
-            res.json(starred);
-
-        }
+        res.json({
+            id: starquestion.user
+        })
 
     })
 
@@ -199,9 +84,139 @@ router.get(
 
 router.delete(
 
-    '/',
+    '/questions/:id',
+    protect,
+    isstarqauthor,
 
-    
+    asyncHandler( async(req,res) => {
+
+        User.update({_id: req.user},{$pull: {starredquestions: req.starquestion }},{upsert:true},function(err){
+            if(err){
+                    console.log(err);
+            }else{
+                    console.log("Successfully deleted");
+            }
+        });
+
+        Question.update({_id: req.question},{$pull: {stars: req.starquestion }},{upsert:true},function(err){
+            if(err){
+                    console.log(err);
+            }else{
+                    console.log("Successfully deleted");
+            }
+        });
+
+        await Starquestion.findByIdAndDelete(req.starquestion);
+
+        res.json({
+            message: "Removed from starred questions"
+        })
+
+    })
+
+)
+
+router.post(
+
+    '/answers',
+    protect,
+
+    asyncHandler ( async(req,res) => {
+
+        const { answer } = req.body;
+
+        const staranswerExists = await Staranswer.findOne( { "user": req.user , "answer": answer } );
+
+        if(staranswerExists) {
+            res.status(400);
+            throw new Error("Already Starred");
+        }
+
+        const staranswer = new Staranswer({
+            "user" : req.user,
+            "answer" : answer
+        });
+
+        User.update({_id: req.user},{$push: {starredanswers: staranswer._id }},{upsert:true},function(err){
+            if(err){
+                    console.log(err);
+            }else{
+                    console.log("Successfully added");
+            }
+        });
+
+        Answer.update({_id: answer},{$push: {stars: staranswer._id }},{upsert:true},function(err){
+            if(err){
+                    console.log(err);
+            }else{
+                    console.log("Successfully added");
+            }
+        });
+
+        await staranswer.save();
+
+        if(staranswer) {
+            res.status(200);
+            res.json({
+                id : staranswer._id,
+                answerid: staranswer.answer
+            })
+        }
+
+    })
+
+)
+
+router.get(
+
+    '/answers/:id',
+    protect,
+    isstaraauthor,
+
+    asyncHandler( async(req,res) => {
+
+        const staranswer = await Staranswer.findById(req.staranswer);
+
+        res.json({
+            id: staranswer.user,
+            answerid: staranswer.answer
+        })
+
+    })
+
+)
+
+router.delete(
+
+    '/answers/:id',
+    protect,
+    isstaraauthor,
+
+    asyncHandler( async(req,res) => {
+
+        User.update({_id: req.user},{$pull: {starredanswers: req.staranswer }},{upsert:true},function(err){
+            if(err){
+                    console.log(err);
+            }else{
+                    console.log("Successfully deleted");
+            }
+        });
+
+        Answer.update({_id: req.answer},{$pull: {stars: req.staranswer }},{upsert:true},function(err){
+            if(err){
+                    console.log(err);
+            }else{
+                    console.log("Successfully deleted");
+            }
+        });
+
+        await Staranswer.findByIdAndDelete(req.staranswer);
+
+        res.json({
+            message: "Removed from starred answers"
+        })
+
+    })
 
 )
 

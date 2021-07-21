@@ -7,7 +7,13 @@ import {
     ALL_QUESTIONS_FAILURE,
     VIEW_QUESTION_REQUEST,
     VIEW_QUESTION_SUCCESS,
-    VIEW_QUESTION_FAILURE
+    VIEW_QUESTION_FAILURE,
+    DELETE_QUESTION_REQUEST,
+    DELETE_QUESTION_SUCCESS,
+    DELETE_QUESTION_FAILURE,
+    SEARCH_QUESTION_REQUEST,
+    SEARCH_QUESTION_SUCCESS,
+    SEARCH_QUESTION_FAILURE
 } from '../constants/questionconstants'
 
 export const askquestionReducer = ( state = {} , action ) => {
@@ -38,7 +44,7 @@ export const askquestionReducer = ( state = {} , action ) => {
 
 }
 
-export const allquestionsReducer = ( state={question:[]} , action ) => {
+export const allquestionsReducer = ( state={questions:[]} , action ) => {
 
     switch(action.type) {
 
@@ -87,6 +93,62 @@ export const viewquestionReducer = ( state={} , action ) => {
                 erroe: action.payload
             }
         
+        default:
+            return state
+
+    }
+
+}
+
+export const deletequestionReducer = ( state={} , action ) => {
+
+    switch(action.type) {
+
+        case DELETE_QUESTION_REQUEST:
+            return {
+                loading: true
+            }
+
+        case DELETE_QUESTION_SUCCESS:
+            return {
+                loading: false,
+                deleteQuestion: action.payload
+            }
+
+        case DELETE_QUESTION_FAILURE:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+
+    }
+
+}
+
+export const searchquestionReducer = ( state={} , action ) => {
+
+    switch(action.type) {
+
+        case SEARCH_QUESTION_REQUEST:
+            return {
+                loading: true
+            }
+
+        case SEARCH_QUESTION_SUCCESS:
+            return {
+                loading: false,
+                searchQuestion: action.payload
+            }
+
+        case SEARCH_QUESTION_FAILURE:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
         default:
             return state
 

@@ -7,7 +7,10 @@ import {
     LOGIN_FAILURE,
     VIEW_PROFILE_REQUEST,
     VIEW_PROFILE_SUCCESS,
-    VIEW_PROFILE_FAILURE
+    VIEW_PROFILE_FAILURE,
+    UPDATE_PROFILE_REQUEST,
+    UPDATE_PROFILE_SUCCESS,
+    UPDATE_PROFILE_FAILURE
 } from '../constants/userconstants'
 
 export const registerReducer = ( state = {} , action ) => {
@@ -81,6 +84,34 @@ export const viewprofileReducer = ( state={} , action ) => {
             }
 
         case VIEW_PROFILE_FAILURE:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+
+    }
+
+}
+
+export const updateprofileReducer = ( state={} , action ) => {
+
+    switch(action.type) {
+
+        case UPDATE_PROFILE_REQUEST:
+            return {
+                loading: true
+            }
+        
+        case UPDATE_PROFILE_SUCCESS:
+            return {
+                loading: false,
+                updateProfile: action.payload
+            }
+
+        case UPDATE_PROFILE_FAILURE:
             return {
                 loading: false,
                 error: action.payload

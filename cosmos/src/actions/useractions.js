@@ -8,7 +8,10 @@ import {
     LOGIN_FAILURE,
     VIEW_PROFILE_REQUEST,
     VIEW_PROFILE_SUCCESS,
-    VIEW_PROFILE_FAILURE
+    VIEW_PROFILE_FAILURE,
+    UPDATE_PROFILE_REQUEST,
+    UPDATE_PROFILE_SUCCESS,
+    UPDATE_PROFILE_FAILURE
 } from '../constants/userconstants'
 
 export const registerAction = ( mailid , password , username ) => async(dispatch) => {
@@ -34,8 +37,6 @@ export const registerAction = ( mailid , password , username ) => async(dispatch
             type: REGISTER_SUCCESS,
             payload: data
         })
-
-        console.log(data);
 
         localStorage.setItem('userInfo',JSON.stringify(data));
 
@@ -96,7 +97,6 @@ export const viewprofileAction = ( username ) => async(dispatch,getState) => {
         })
 
         const { login: {userInfo}} = getState();
-        console.log(userInfo.token);
 
         const config = {
             headers: {
@@ -118,6 +118,47 @@ export const viewprofileAction = ( username ) => async(dispatch,getState) => {
         
         dispatch({
             type: VIEW_PROFILE_FAILURE,
+            payload: error.message
+        })
+
+    }
+
+}
+
+export const updateprofileAction = ( mailid , username , profilepic , description ) => async( dispatch , getState ) => {
+
+    try {
+        
+        dispatch({
+            type: UPDATE_PROFILE_REQUEST
+        })
+
+        const { login: { userInfo } } = getState();
+
+        const config = {
+            headers: {
+                "Content-Type" : "application/json",
+                Authorization : `${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios.put(
+            '/api/users/',
+            { mailid , username , profilepic , description },
+            config
+        )
+
+        dispatch({
+            type: UPDATE_PROFILE_SUCCESS,
+            payload: data
+        })
+
+        localStorage.setItem('userInfo' , JSON.stringify(data));
+
+    } catch (error) {
+        
+        dispatch({
+            type: UPDATE_PROFILE_FAILURE,
             payload: error.message
         })
 

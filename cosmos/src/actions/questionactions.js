@@ -8,10 +8,16 @@ import {
     ALL_QUESTIONS_FAILURE,
     VIEW_QUESTION_REQUEST,
     VIEW_QUESTION_SUCCESS,
-    VIEW_QUESTION_FAILURE
+    VIEW_QUESTION_FAILURE,
+    DELETE_QUESTION_SUCCESS,
+    DELETE_QUESTION_REQUEST,
+    DELETE_QUESTION_FAILURE,
+    SEARCH_QUESTION_REQUEST,
+    SEARCH_QUESTION_SUCCESS,
+    SEARCH_QUESTION_FAILURE
 } from '../constants/questionconstants'
 
-export const askquestionAction = ( statement , user ) => async(dispatch) => {
+export const askquestionAction = ( statement , user ) => async(dispatch,getState) => {
 
     try {
 
@@ -19,9 +25,12 @@ export const askquestionAction = ( statement , user ) => async(dispatch) => {
             type: ASK_QUESTION_REQUEST
         })
 
+        const { login: {userInfo} } = getState();
+
         const config = {
             headers: {
-                "Content-Type" : "application/json"
+                "Content-Type" : "application/json",
+                Authorization: `${userInfo.token}`
             }
         }
 
@@ -66,7 +75,6 @@ export const allquestionsAction = () => async(dispatch) => {
             {},
             config
         )
-        console.log(data);
 
         dispatch({
             type: ALL_QUESTIONS_SUCCESS,
@@ -115,6 +123,78 @@ export const viewquestionAction = ( id ) => async(dispatch) => {
 
         dispatch({
             type: VIEW_QUESTION_FAILURE,
+            payload: error.message
+        })
+
+    }
+
+}
+
+export const deletequestionAction = ( id ) => async( dispatch , getState ) => {
+
+    try {
+        
+        dispatch({
+            type: DELETE_QUESTION_REQUEST
+        })
+
+        const { login: {userInfo} } = getState();
+
+        const config = {
+            headers: {
+                Authorization : `${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios.delete(
+            `/api/questions/${id}`,
+            config
+        )
+
+        dispatch({
+            type: DELETE_QUESTION_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        
+        dispatch({
+            type: DELETE_QUESTION_FAILURE,
+            payload: error.message
+        })
+
+    }
+
+}
+
+export const searchquestionAction = ( text ) => async( dispatch ) => {
+
+    try {
+        
+        dispatch({
+            type: SEARCH_QUESTION_REQUEST
+        })
+
+        const config = {
+            headers: {
+                "Content-Type" : "application/json"
+            }
+        }
+
+        const { data } = await axios.get(
+            `/api/questions/search/${text}`,
+            config
+        )
+
+        dispatch({
+            type: SEARCH_QUESTION_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        
+        dispatch({
+            type: SEARCH_QUESTION_FAILURE,
             payload: error.message
         })
 

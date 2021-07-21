@@ -13,3 +13,9 @@
 .navbar > .navbarbox > .navbarcontainer > .navbarnavbar > .navbarsearch {
     float: right;
 }
+
+.navbaru > img {
+    height: 5vh;
+    width: 5vh;
+    border-radius: 50%;
+}

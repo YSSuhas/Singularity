@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('./userschema');
-const Star = require('./starschema');
+const Starquestion = require('./starquestionschema');
 const Answer = require('./answerschema');
 
 const questionSchema = mongoose.Schema(
@@ -19,7 +19,7 @@ const questionSchema = mongoose.Schema(
         }],
         stars: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Star'
+            ref: 'Starquestion'
         }]
     },
     {

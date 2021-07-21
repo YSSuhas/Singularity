@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const gettoken = (id) => {
-    return jwt.sign( { id } , process.env.JWT_Private_Key , { expiresIn: '15d' });
+    return jwt.sign( { id } , process.env.JWT_Private_Key );
 }
 
 module.exports = gettoken

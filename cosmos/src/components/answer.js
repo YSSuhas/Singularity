@@ -6,12 +6,11 @@ import './answer.css'
 function Answer({ questionid }) {
 
     const [ solution , setSolution ] = useState('');
-    const user = JSON.parse(localStorage.getItem('userInfo'));
 
     const dispatch = useDispatch();
 
     const submitHandler = () => {
-        dispatch( addanswerAction( solution , questionid , user._id ) );
+        dispatch( addanswerAction( solution , questionid ) );
     }
 
     return (

@@ -13,7 +13,7 @@ function Myquestions( { match } ) {
     const { loading , error , viewProfile } = viewprofile;
 
     useEffect( () => {
-        document.title = "Profile > SINGULARITY";
+        document.title = "My Questions > SINGULARITY";
         dispatch(viewprofileAction(match.params.id));
     } , [ dispatch ] )
 
@@ -35,10 +35,10 @@ function Myquestions( { match } ) {
 
                 return (
 
-                    <div className="allquestionsq">
-                        <div className="allquestionsqf">
+                    <div className="myquestionsq">
+                        <div className="myquestionsqf">
                             <p>{time}</p>
-                            <h6>{question.user.username}</h6>
+                            <h6>{viewProfile.username}</h6>
                             <p>{date}</p>
                         </div>
                         <LinkContainer to={`/questions/${question._id}`}>

@@ -23,7 +23,7 @@ const sendmail = ( mailid , username ) => {
 								}
 						],
 						"Subject": "Singularity",
-						"TextPart": `Hi there ${username}`,
+						"TextPart": `Welcome to Singularity`,
 						"HTMLPart": `Dear ${username}, thanks for jumping into Singularity. Post anything related to cosmos here and have fun`
 				}
 		]

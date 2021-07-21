@@ -25,7 +25,7 @@ function Register( { history } ) {
         if(userInfo) {
             history.push('/');
         }
-        document.title("REGISTER | SINGULARITY");
+        document.title = "Register > SINGULARITY";
     }, [ history , userInfo , dispatch ])
 
     const handleSubmit = (e) => {

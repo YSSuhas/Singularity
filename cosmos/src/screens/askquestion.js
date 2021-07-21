@@ -12,10 +12,15 @@ function Askquestion( { history } ) {
         document.title = "Ask Question > SINGULARITY" ;
     })
 
+    const clickHandler = () => {
+        history.push('/questions');
+    }
+
     return (
         <div className="question">
             <Navbars />
             <Question redirect={history} />
+            <button onClick={clickHandler}>Go back</button>
         </div>
     )
 }

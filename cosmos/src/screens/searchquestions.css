@@ -1,0 +1,27 @@
+.searchquestions {
+    margin-top: 15vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.searchquestions > .searchquestionsq {
+    border: #111111 solid;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.searchquestions > .searchquestionsq > .searchquestionsqf {
+    display: flex;
+    justify-content: space-between;
+}
+
+.searchquestions > .searchquestionsq > .searchquestionsqf > p {
+    font-size: 10px;
+}
+
+.searchquestions > button {
+    margin-bottom: 20px;
+    margin-left: 45%;
+}

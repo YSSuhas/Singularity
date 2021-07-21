@@ -10,6 +10,12 @@ import Askquestion from './screens/askquestion'
 import Allquestions from './screens/allquestions'
 import Viewquestion from './screens/viewquestion'
 import Myquestions from './screens/myquestions'
+import Profileedit from './screens/profileedit'
+import Myanswers from './screens/myanswers'
+import Chat from './screens/chat'
+import Searchquestions from './screens/searchquestions'
+import Starredquestions from './screens/starredquestions'
+import Starredanswers from './screens/starredanswers'
 
 function App() {
   return (
@@ -23,8 +29,14 @@ function App() {
           <Route path={"/ask_question"} component={Askquestion} />
           <Route path={"/questions/:id"} component={Viewquestion} />
           <Route path={"/questions"} component={Allquestions} />
+          <Route path={"/:id/edit_profile"} component={Profileedit}/>
           <Route path={"/:id/profile"} component={Profile} />
           <Route path={"/:id/questions"} component={Myquestions} />
+          <Route path={"/:id/answers"} component={Myanswers} />
+          <Route path={"/chat/:id"} component={Chat} />
+          <Route path={"/search/:id"} component={Searchquestions} />
+          <Route path={"/:id/starredquestions"} component={Starredquestions} />
+          <Route path={"/:id/starredanswers"} component={Starredanswers} />
         </Switch>
       </BrowserRouter>
     </div>

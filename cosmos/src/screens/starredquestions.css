@@ -1,0 +1,22 @@
+.starredquestions {
+    margin-top: 15vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.starredquestions > .starredquestionsd > .starredquestionsq {
+    border: #111111 solid;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.starredquestionsqf {
+    display: flex;
+    justify-content: space-between;
+}
+
+.starredquestionsqf > p {
+    font-size: 10px;
+}

@@ -1,0 +1,40 @@
+.myanswers {
+    margin-top: 15vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.myanswers > div > .myanswersa {
+    border: #111111 solid;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.myanswers > div > .myanswersa > .myanswersaf {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.myanswers > div > .myanswersa > .myanswersas {
+    padding: 15px;
+}
+
+.myanswers > div > .myanswersa > .myanswersaa {
+    border-top: solid #111111;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.myanswers > div > .myanswersa > .myanswersaf > p {
+    font-size: 10px;
+}
+
+.myanswers > div > .myanswersa > .myanswersaa > p {
+    font-size: 10px;
+}

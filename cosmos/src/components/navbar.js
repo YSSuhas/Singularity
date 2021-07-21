@@ -33,7 +33,8 @@ function Navbars() {
                     </Nav>
                     { user ? (
                         <Nav className="navbaru">
-                            <Nav.Link href={`${user.username}/profile`}>{user.username}</Nav.Link>
+                            <img src={user.profilepic} />
+                            <Nav.Link href={`/${user.username}/profile`}>{user.username}</Nav.Link>
                         </Nav>
                     ) : (
                         <Nav className="navbaru">

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('./userschema');
 const Comment = require('./commentschema');
-const Star = require('./starschema');
+//const Star = require('./starquestionschema');
 
 const blogSchema = mongoose.Schema(
     {
@@ -17,10 +17,10 @@ const blogSchema = mongoose.Schema(
             required: true,
             ref: 'User'
         },
-        stars: [{
+        /*stars: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Star'
-        }],
+        }],*/
         comments: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Comment'

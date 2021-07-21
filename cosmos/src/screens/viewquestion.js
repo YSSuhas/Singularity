@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { viewquestionAction } from '../actions/questionactions';
+import { deletequestionAction, viewquestionAction } from '../actions/questionactions';
 import './viewquestion.css'
 import Navbars from '../components/navbar';
 import Answer from '../components/answer';
-import Star from '../components/star';
-import { viewanswersAction } from '../actions/answeractions';
+import Starquestion from '../components/starquestion';
+import Staranswer from '../components/staranswer';
+import { deleteanswerAction } from '../actions/answeractions';
 
 function Viewquestion( { match , history } ) {
 
@@ -23,11 +24,13 @@ function Viewquestion( { match , history } ) {
             history.push("/login");
         }
         dispatch(viewquestionAction(match.params.id));
-        dispatch(viewanswersAction(match.params.id));
 
     } , [history , dispatch] )
 
-    console.log(viewQuestion);
+    const submitHandler = ( () => {
+        dispatch(deletequestionAction(match.params.id));
+        history.push("/questions");
+    })
 
     return (
         <div className="viewquestion">
@@ -36,11 +39,19 @@ function Viewquestion( { match , history } ) {
             <div className="viewquestionq">
                 <div className="viewquestionqr">
                     <h6>{viewQuestion.user.username}</h6>
-                    <Star question={questionid} answer="undefined" blog="undefined" comment="undefined" />
+                    { user.id === viewQuestion.user._id &&
+                    <form onSubmit={submitHandler}>
+                        <button type="submit">Delete</button>
+                    </form> }
+                    <Starquestion question={questionid} />
                 </div>
                 <h5>{viewQuestion.statement}</h5>
                 <Answer questionid={questionid}/>
                 {viewQuestion.answers && viewQuestion.answers.map( answer => {
+
+                    const deleteanswerHandler = ( () => {
+                        dispatch(deleteanswerAction(answer._id));
+                    })
 
                     const date = answer.createdAt.substr(0,10);
                     const time = answer.createdAt.substr(11,12);
@@ -48,9 +59,14 @@ function Viewquestion( { match , history } ) {
                     return (
                         <div className="viewquestionqa">
                             <div className="viewquestionqaf">
-                                <p>{time}</p>
                                 <h6>{answer.useranswered.username}</h6>
+                                <p>{time}</p>
+                                { user.id === answer.useranswered._id &&
+                                <form onSubmit={deleteanswerHandler}>
+                                    <button type="submit">Delete</button>
+                                </form> }
                                 <p>{date}</p>
+                                <Staranswer answer={answer._id} />
                             </div>
                             <div>
                                 <h5>{answer.solution}</h5>

@@ -3,7 +3,9 @@ const asyncHandler = require('express-async-handler');
 const Question = require('../database/schemas/questionschema');
 const User = require('../database/schemas/userschema');
 const bodyParser = require('body-parser');
-const { protect } = require('../middleware/authmw');
+const { protect , isquestionauthor } = require('../middleware/authmw');
+const Starquestion = require('../database/schemas/starquestionschema');
+const Answer = require('../database/schemas/answerschema');
 
 const router = express.Router();
 
@@ -19,12 +21,14 @@ router.post(
 
         const { statement } = req.body;
 
+        console.log(statement);
+
         const question = new Question({
             "statement" : statement,
-            "user" : user
+            "user" : req.user
         });
 
-        User.update({_id: user},{$push: {questions: question._id }},{upsert:true},function(err){
+        User.update({_id: req.user},{$push: {questions: question._id }},{upsert:true},function(err){
             if(err){
                     console.log(err);
             }else{
@@ -71,6 +75,46 @@ router.get(
                 model: 'User'
             }
         });
+        res.json(question);
+
+    })
+
+)
+
+router.delete(
+
+    '/:id',
+    protect,
+    isquestionauthor,
+
+    asyncHandler( async(req,res) => {
+
+        User.update({_id: req.user},{$pull: {questions: req.question }},{upsert:true},function(err){
+            if(err){
+                    console.log(err);
+            }else{
+                    console.log("Successfully deleted");
+            }
+        });
+
+        await Question.findByIdAndDelete(req.question);
+
+        res.json({
+            message: "Deleted the question"
+        })
+
+    })
+
+)
+
+//Display some questions
+router.get(
+
+    '/search/:text',
+
+    asyncHandler( async(req,res) => {
+
+        const question = await Question.find({ "statement" : {$regex:`.*${req.params.text}.*`} }).populate('user');
         res.json(question);
 
     })

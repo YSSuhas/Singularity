@@ -8,6 +8,8 @@ const userRoute = require('./routes/userroute');
 const questionRoute = require('./routes/questionroute');
 const answerRoute = require('./routes/answerroute');
 const starRoute = require('./routes/starroute');
+const uploadRoute = require('./routes/uploadroute');
+const chatRoute = require('./routes/chatroute');
 
 dotenv.config();
 
@@ -29,6 +31,10 @@ app.use(`/api/questions`, questionRoute);
 app.use(`/api/answers`, answerRoute);
 
 app.use(`/api/stars`, starRoute);
+
+app.use(`/api/upload`, uploadRoute);
+
+app.use(`/api/chats`, chatRoute);
 
 const port = process.env.PORT || 9000;
 const host = process.env.HOST;

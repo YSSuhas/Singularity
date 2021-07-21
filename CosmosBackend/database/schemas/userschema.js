@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const Blog = require('./blogschema');
 const Question = require('./questionschema');
+const Starquestion = require('./starquestionschema');
+const Chat = require('./chatschema');
+const Staranswer = require('./staranswerschema');
 
 const userSchema = mongoose.Schema(
     {
@@ -36,25 +38,13 @@ const userSchema = mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         }],
-        blogs: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Blog'
-        }],
         starredquestions: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Star'
+            ref: 'Starquestion'
         }],
         starredanswers: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Star'
-        }],
-        starredblogs: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Star'
-        }],
-        starredcomments: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Star'
+            ref: 'Staranswer'
         }],
         questions: [{
             type: mongoose.Schema.Types.ObjectId,
@@ -63,6 +53,10 @@ const userSchema = mongoose.Schema(
         answers: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Answer'
+        }],
+        chats: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Chat'
         }]
     },
     {

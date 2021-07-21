@@ -20,3 +20,8 @@
 .allquestions > .allquestionsq > .allquestionsqf > p {
     font-size: 10px;
 }
+
+.allquestions > button {
+    margin-bottom: 20px;
+    margin-left: 45%;
+}
