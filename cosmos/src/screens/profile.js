@@ -35,19 +35,34 @@ function Profile({ match , history }) {
         history.push('/');
     }
 
+    const chatHandler = () => {
+        
+        if(user) {
+            history.push(`/chat/${viewProfile._id}`);
+        }
+
+    }
+
     return (
         <div className="profile">
             <Navbars />
             { viewProfile && 
             <div>
-                <div>
-                    <form onSubmit={editHandler}>
-                        <button type="submit">Edit Profile</button>
-                    </form>
-                    <form onSubmit={logoutHandler}>
-                        <button type="submit">Logout</button>
-                    </form>
-                </div>
+                { user.id === viewProfile._id ?
+                    <div>
+                        <form onSubmit={editHandler}>
+                            <button type="submit">Edit Profile</button>
+                        </form>
+                        <form onSubmit={logoutHandler}>
+                            <button type="submit">Logout</button>
+                        </form>
+                    </div> :
+                    <div>
+                        <form onSubmit={chatHandler}>
+                            <button type="submit">Chat</button>
+                        </form>
+                    </div>
+                }
                 <div className="profileinfo">
                     <img src={viewProfile.profilepic}></img>
                     <h5>{viewProfile.username}</h5>

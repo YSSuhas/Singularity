@@ -54,7 +54,12 @@ router.get(
 
     asyncHandler( async(req,res) => {
 
-        const question = await Question.find({}).populate('user');
+        const { sortfor , type } = req.query;
+
+        var sort = {};
+        sort[sortfor] = type;
+
+        const question = await Question.find({}).populate('user' , 'username profilepic').sort(sort);
         res.json(question);
 
     })
@@ -68,10 +73,11 @@ router.get(
 
     asyncHandler( async(req,res) => {
 
-        const question = await Question.findById(req.params.id).populate('user').populate({
+        const question = await Question.findById(req.params.id).populate('user' , 'username profilepic').populate({
             path: 'answers',
             populate: {
                 path: 'useranswered',
+                select: 'username profilepic',
                 model: 'User'
             }
         });

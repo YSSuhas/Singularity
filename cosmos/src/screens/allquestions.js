@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState , useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import './allquestions.css'
 import Navbars from '../components/navbar'
@@ -7,15 +7,17 @@ import {LinkContainer} from 'react-router-bootstrap'
 
 function Allquestions( { history } ) {
 
+    const [ sortby , setSortby ] = useState('stars1');
+
     const dispatch = useDispatch();
 
     const allquestions = useSelector( state => state.allquestions );
     const { loading , error , questions } = allquestions;
 
     useEffect( () => {
-        dispatch(allquestionsAction());
+        dispatch(allquestionsAction(sortby));
         document.title = "Questions > SINGULARITY";
-    } , [ dispatch ])
+    } , [ sortby , dispatch ])
 
     const clickHandler = () => {
         history.push('/ask_question');
@@ -24,7 +26,16 @@ function Allquestions( { history } ) {
     return (
         <div className="allquestions">
             <Navbars />
-            <button onClick={clickHandler}>Ask question</button>
+            <div className="allquestionsf">
+                <button onClick={clickHandler}>Ask question</button>
+                <select value={sortby} onChange={e => setSortby(e.target.value)}>
+                    <option value="stars1">Stars increasing</option>
+                    <option value="stars-1">Stars decreasing</option>
+                    <option value="createdAt1">Time increasing</option>
+                    <option value="createdAt-1">Time decreasing</option>
+                    <option value="answers-1">Most answered</option>
+                </select>
+            </div>
             { questions && questions.map(question => {
 
                 if(question.statement.length>100) {

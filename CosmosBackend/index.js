@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+var cors = require('cors');
 
 const connectdb = require('./database/database');
 
@@ -19,6 +20,7 @@ const app = express();
 
 app.use(express.json());
 app.use(morgan('dev'));
+app.use(cors());
 
 app.get('/', (req,res) => {
     res.send("API is running...");

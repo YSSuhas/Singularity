@@ -7,6 +7,7 @@ import Answer from '../components/answer';
 import Starquestion from '../components/starquestion';
 import Staranswer from '../components/staranswer';
 import { deleteanswerAction } from '../actions/answeractions';
+import { LinkContainer } from 'react-router-bootstrap';
 
 function Viewquestion( { match , history } ) {
 
@@ -38,12 +39,17 @@ function Viewquestion( { match , history } ) {
             {viewQuestion && 
             <div className="viewquestionq">
                 <div className="viewquestionqr">
-                    <h6>{viewQuestion.user.username}</h6>
+                    <LinkContainer to={`/${viewQuestion.user.username}/profile`}>
+                        <h6>{viewQuestion.user.username}</h6>
+                    </LinkContainer>
                     { user.id === viewQuestion.user._id &&
                     <form onSubmit={submitHandler}>
                         <button type="submit">Delete</button>
                     </form> }
-                    <Starquestion question={questionid} />
+                    <div className="viewquestionqrf">
+                        <p>{viewQuestion.stars.length}</p>
+                        <Starquestion question={questionid} />
+                    </div>
                 </div>
                 <h5>{viewQuestion.statement}</h5>
                 <Answer questionid={questionid}/>
@@ -66,7 +72,10 @@ function Viewquestion( { match , history } ) {
                                     <button type="submit">Delete</button>
                                 </form> }
                                 <p>{date}</p>
-                                <Staranswer answer={answer._id} />
+                                <div className="viewquestionqaff">
+                                    <p>{answer.stars.length}</p>
+                                    <Staranswer answer={answer._id} />
+                                </div>
                             </div>
                             <div>
                                 <h5>{answer.solution}</h5>

@@ -11,8 +11,7 @@ function Typechat({ match }) {
 
     const dispatch = useDispatch();
 
-    const submitHandler = (e) => {
-        e.preventDefault();
+    const submitHandler = () => {
         if(message!='') {
             dispatch( addchatAction( match , user.id , match , message ) );
         }

@@ -21,7 +21,8 @@
     font-size: 10px;
 }
 
-.allquestions > button {
-    margin-bottom: 20px;
-    margin-left: 45%;
+.allquestions > .allquestionsf {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5vh;
 }

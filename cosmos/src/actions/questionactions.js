@@ -56,13 +56,44 @@ export const askquestionAction = ( statement , user ) => async(dispatch,getState
 
 }
 
-export const allquestionsAction = () => async(dispatch) => {
+export const allquestionsAction = ( sortby ) => async(dispatch) => {
 
     try {
         
         dispatch({
             type: ALL_QUESTIONS_REQUEST
         })
+
+        var sortfor , type;
+
+        switch(sortby) {
+
+            case "stars1":
+                    sortfor = 'stars',
+                    type = 1
+                    break;
+
+            case "stars-1":
+                    sortfor = 'stars',
+                    type = -1
+                    break;
+
+            case "createdAt1":
+                    sortfor = 'createdAt',
+                    type = 1
+                    break;
+
+            case "createdAt-1":
+                    sortfor = 'createdAt',
+                    type = -1
+                    break;
+
+            case "answers1":
+                    sortfor = 'answers',
+                    type = 1
+                    break;
+
+        }
 
         const config = {
             headers: {
@@ -72,7 +103,12 @@ export const allquestionsAction = () => async(dispatch) => {
 
         const { data } = await axios.get(
             '/api/questions/',
-            {},
+            {
+                params: {
+                    sortfor: sortfor,
+                    type: type
+                }
+            },
             config
         )
 

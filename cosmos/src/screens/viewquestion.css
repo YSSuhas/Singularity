@@ -14,6 +14,10 @@
     justify-content: space-between;
 }
 
+.viewquestion > .viewquestionq > .viewquestionqr > .viewquestionqrf {
+    display: flex;
+}
+
 .viewquestion > .viewquestionq > .viewquestionqr > form > button {
     border: none;
     background-color: transparent;
@@ -38,6 +42,10 @@
 .viewquestion > .viewquestionq > .viewquestionqa > .viewquestionqaf {
     display: flex;
     justify-content: space-between;
+}
+
+.viewquestion > .viewquestionq > .viewquestionqa > .viewquestionqaf > .viewquestionqaff {
+    display: flex;
 }
 
 .viewquestion > .viewquestionq > .viewquestionqa > .viewquestionqaf > p {

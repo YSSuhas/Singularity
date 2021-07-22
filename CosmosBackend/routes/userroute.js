@@ -91,12 +91,13 @@ router.get(
 
     asyncHandler( async ( req , res ) => {
 
-        const user = await User.findById(req.user).populate('questions').populate({
+        const user = await User.findOne({ 'username': req.params.username } , 'username profilepic mailid description questions answers starredquestions starredanswers createdAt updatedAt').populate('questions').populate({
             path: 'answers',
             populate: {
                 path: 'question',
                 populate: {
                     path: 'user',
+                    select: 'username profilepic',
                     model: 'User'
                 }
             }
@@ -106,6 +107,7 @@ router.get(
                 path: 'question',
                 populate: {
                     path: 'user',
+                    select: 'username profilepic',
                     model: 'User'
                 }
             }
@@ -117,6 +119,7 @@ router.get(
                     path: 'question',
                     populate: {
                         path: 'user',
+                        select: 'username profilepic',
                         model: 'User'
                     }
                 }

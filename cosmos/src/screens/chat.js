@@ -51,7 +51,7 @@ function Chat({ match }) {
 
     var channel = pusher.subscribe(`${REACT_APP_PUSHERChannel}`);
     channel.bind('updated', function(data) {
-      alert(JSON.stringify(data));
+      //alert(JSON.stringify(data));
       setChats([...chats , data.msg]);
     });
 
@@ -61,7 +61,6 @@ function Chat({ match }) {
     };
 
     } , [ chats ])
-    console.log(chats);
 
     return (
         <div className="chat">
@@ -82,8 +81,9 @@ function Chat({ match }) {
               <p>Start chatting!!!</p>
               )
             }
-            </div>
+            
             <Typechat match={match.params.id} className="chattc"/>
+            </div>
         </div>
     )
 }
