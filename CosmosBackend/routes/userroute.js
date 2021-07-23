@@ -147,6 +147,13 @@ router.get(
                 select: 'username profilepic',
                 model: 'User'
             }
+        }).populate({
+            path: 'chats',
+            populate: {
+                path: 'userb',
+                select: 'username profilepic',
+                model: 'User'
+            }
         })
 
         res.json(user);
