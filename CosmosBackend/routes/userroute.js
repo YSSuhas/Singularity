@@ -146,6 +146,12 @@ router.get(
         const user = await User.findById(req.user , 'chats').populate({
             path: 'chats',
             populate: {
+                path: 'chats',
+                options: { sort: { updatedAt: -1 } }
+            }
+        }).populate({
+            path: 'chats',
+            populate: {
                 path: 'usera',
                 select: 'username profilepic',
                 model: 'User'
@@ -157,9 +163,6 @@ router.get(
                 select: 'username profilepic',
                 model: 'User'
             }
-        }).populate({
-            path: 'chats',
-            options: { sort: { updatedAt: -1 } }
         });
 
         res.json(user);
