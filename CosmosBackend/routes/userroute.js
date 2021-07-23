@@ -154,7 +154,7 @@ router.get(
                 select: 'username profilepic',
                 model: 'User'
             }
-        })
+        }).sort('chats.time',-1)
 
         res.json(user);
 

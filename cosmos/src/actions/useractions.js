@@ -11,7 +11,10 @@ import {
     VIEW_PROFILE_FAILURE,
     UPDATE_PROFILE_REQUEST,
     UPDATE_PROFILE_SUCCESS,
-    UPDATE_PROFILE_FAILURE
+    UPDATE_PROFILE_FAILURE,
+    SEE_USER_CHATS_REQUEST,
+    SEE_USER_CHATS_SUCCESS,
+    SEE_USER_CHATS_FAILURE
 } from '../constants/userconstants'
 
 export const registerAction = ( mailid , password , username ) => async(dispatch) => {
@@ -159,6 +162,43 @@ export const updateprofileAction = ( mailid , username , profilepic , descriptio
         
         dispatch({
             type: UPDATE_PROFILE_FAILURE,
+            payload: error.message
+        })
+
+    }
+
+}
+
+export const seeuserchatsAction = () => async( dispatch , getState ) => {
+
+    try {
+        
+        dispatch({
+            type: SEE_USER_CHATS_REQUEST
+        })
+
+        const { login: { userInfo } } = getState();
+
+        const config = {
+            headers: {
+                Authorization: `${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios.get(
+            `/api/users/${userInfo.username}/chats`,
+            config
+        )
+
+        dispatch({
+            type: SEE_USER_CHATS_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        
+        dispatch({
+            type: SEE_USER_CHATS_FAILURE,
             payload: error.message
         })
 

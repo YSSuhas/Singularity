@@ -10,7 +10,10 @@ import {
     VIEW_PROFILE_FAILURE,
     UPDATE_PROFILE_REQUEST,
     UPDATE_PROFILE_SUCCESS,
-    UPDATE_PROFILE_FAILURE
+    UPDATE_PROFILE_FAILURE,
+    SEE_USER_CHATS_REQUEST,
+    SEE_USER_CHATS_SUCCESS,
+    SEE_USER_CHATS_FAILURE
 } from '../constants/userconstants'
 
 export const registerReducer = ( state = {} , action ) => {
@@ -120,6 +123,34 @@ export const updateprofileReducer = ( state={} , action ) => {
         default:
             return state
 
+    }
+
+}
+
+export const seeuserchatsReducer = ( state={} , action ) => {
+
+    switch(action.type) {
+    
+        case SEE_USER_CHATS_REQUEST:
+            return {
+                loading: true
+            }
+
+        case SEE_USER_CHATS_SUCCESS:
+            return {
+                loading: false,
+                seeUserChats: action.payload
+            }
+
+        case SEE_USER_CHATS_FAILURE:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    
     }
 
 }

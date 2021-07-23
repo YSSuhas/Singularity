@@ -4,6 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import {
     loginReducer,
     registerReducer,
+    seeuserchatsReducer,
     updateprofileReducer,
     viewprofileReducer
 } from './reducers/userreducers'
@@ -52,7 +53,8 @@ const reducer = combineReducers({
     updateprofile                : updateprofileReducer,
     addchat                      : addchatReducer, 
     seechat                      : seechatReducer,
-    searchquestion               : searchquestionReducer
+    searchquestion               : searchquestionReducer,
+    seeuserchats                 : seeuserchatsReducer
 })
 
 const middleware = [ thunk ]
