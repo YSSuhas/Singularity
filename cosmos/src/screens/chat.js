@@ -52,7 +52,9 @@ function Chat({ match }) {
     var channel = pusher.subscribe(`${REACT_APP_PUSHERChannel}`);
     channel.bind('updated', function(data) {
       //alert(JSON.stringify(data));
-      setChats([...chats , data.msg]);
+      if( ( data.msg.from == user.id && data.msg.to == match.params.id ) || ( data.msg.from == match.params.id && data.msg.to == user.id ) ) {
+        setChats([...chats , data.msg]);
+      }
     });
 
     return () => {
