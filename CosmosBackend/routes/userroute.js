@@ -135,7 +135,7 @@ router.get(
 //Get chats of user
 router.get(
 
-    '/chats',
+    '/:username/chats',
     protect,
 
     asyncHandler( async(req,res) => {
