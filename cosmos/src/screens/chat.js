@@ -81,9 +81,9 @@ function Chat({ match }) {
               <p>Start chatting!!!</p>
               )
             }
-            
-            <Typechat match={match.params.id} className="chattc"/>
             </div>
+            <Typechat match={match.params.id} className="chattc"/>
+            
         </div>
     )
 }

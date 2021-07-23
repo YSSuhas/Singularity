@@ -9,8 +9,12 @@ function Answer({ questionid }) {
 
     const dispatch = useDispatch();
 
-    const submitHandler = () => {
-        dispatch( addanswerAction( solution , questionid ) );
+    const submitHandler = (e) => {
+        e.preventDefault();
+        if(solution!='') {
+            dispatch( addanswerAction( solution , questionid ) );
+            setSolution('');
+        }
     }
 
     return (

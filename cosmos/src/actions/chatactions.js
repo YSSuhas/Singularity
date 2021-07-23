@@ -15,7 +15,7 @@ export const addchatAction = ( chatwith , from , to , message ) => async( dispat
         dispatch({
             type: ADD_CHAT_REQUEST
         })
-
+        console.log(chatwith + " " + from + ' '+ to+' '+ message);
         const { login: { userInfo } } = getState();
 
         const config = {
@@ -25,11 +25,10 @@ export const addchatAction = ( chatwith , from , to , message ) => async( dispat
         }
 
         const { data } = await axios.post(
-            '/api/chats/',
+            'https://singularity-api.herokuapp.com/api/chats/',
             { chatwith , from , to , message },
             config
         )
-        console.log(data);
 
         dispatch({
             type: ADD_CHAT_SUCCESS,

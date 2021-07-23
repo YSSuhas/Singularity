@@ -48,6 +48,45 @@
     display: flex;
 }
 
+.viewquestion > .viewquestionq > .viewquestionqa > .viewquestionqaf > .viewquestionqafp {
+    display: flex;
+}
+
+.viewquestion > .viewquestionq > .viewquestionqa > .viewquestionqaf > .viewquestionqafp:hover {
+    cursor: pointer;
+}
+
+.viewquestion > .viewquestionq > .viewquestionqa > .viewquestionqaf > .viewquestionqafp > img {
+    height: 4vh;
+    width: 4vh;
+    border-radius: 50%;
+}
+
+.viewquestion > .viewquestionq > .viewquestionqa > .viewquestionqaf > .viewquestionqafp > .viewquestionqafpn {
+    margin-left: 10px;
+    margin-top: 4px;
+}
+
 .viewquestion > .viewquestionq > .viewquestionqa > .viewquestionqaf > p {
     font-size: 10px;
+}
+
+.viewquestion > .viewquestionq > .viewquestionqr > .viewquestionqrp {
+    display: flex;
+    justify-content: space-around;
+}
+
+.viewquestion > .viewquestionq > .viewquestionqr > .viewquestionqrp > .viewquestionqrpn {
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.viewquestion > .viewquestionq > .viewquestionqr > .viewquestionqrp:hover {
+    cursor: pointer;
+}
+
+.viewquestion > .viewquestionq > .viewquestionqr > .viewquestionqrp > img {
+    height: 5vh;
+    width: 5vh;
+    border-radius: 50%;
 }

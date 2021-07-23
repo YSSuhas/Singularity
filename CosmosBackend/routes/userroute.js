@@ -132,6 +132,34 @@ router.get(
 
 )
 
+//Get chats of user
+router.get(
+
+    '/chats',
+    protect,
+
+    asyncHandler( async(req,res) => {
+
+        const user = await User.findById(req.user , 'chats').populate({
+            path: 'chats',
+            populate: {
+                path: 'usera',
+                select: 'username profilepic',
+                model: 'User'
+            },
+            populate: {
+                path: 'userb',
+                select: 'username profilepic',
+                model: 'User'
+            }
+        })
+
+        res.json(user);
+
+    } )
+
+)
+
 router.put(
 
     '/',

@@ -21,6 +21,8 @@ function Viewquestion( { match , history } ) {
     const questionid = match.params.id;
     useEffect( () => {
         
+        document.title = "Question > SINGULARITY"
+
         if(!user) {
             history.push("/login");
         }
@@ -39,9 +41,12 @@ function Viewquestion( { match , history } ) {
             {viewQuestion && 
             <div className="viewquestionq">
                 <div className="viewquestionqr">
-                    <LinkContainer to={`/${viewQuestion.user.username}/profile`}>
-                        <h6>{viewQuestion.user.username}</h6>
-                    </LinkContainer>
+                    <div className="viewquestionqrp">
+                        <img src={`${viewQuestion.user.profilepic}`}></img>
+                        <LinkContainer className="viewquestionqrpn" to={`/${viewQuestion.user.username}/profile`}>
+                            <h5>{viewQuestion.user.username}</h5>
+                        </LinkContainer>
+                    </div>
                     { user.id === viewQuestion.user._id &&
                     <form onSubmit={submitHandler}>
                         <button type="submit">Delete</button>
@@ -65,7 +70,12 @@ function Viewquestion( { match , history } ) {
                     return (
                         <div className="viewquestionqa">
                             <div className="viewquestionqaf">
-                                <h6>{answer.useranswered.username}</h6>
+                                <div className="viewquestionqafp">
+                                    <img src={`${answer.useranswered.profilepic}`} />
+                                    <LinkContainer className="viewquestionqafpn" to={`/${answer.useranswered.username}/profile`}>
+                                        <h6>{answer.useranswered.username}</h6>
+                                    </LinkContainer>
+                                </div>
                                 <p>{time}</p>
                                 { user.id === answer.useranswered._id &&
                                 <form onSubmit={deleteanswerHandler}>
