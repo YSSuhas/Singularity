@@ -141,7 +141,7 @@ router.get(
     asyncHandler( async(req,res) => {
 
         var sort = {};
-        sort['chats.time'] = -1;
+        sort['chats.chats.time'] = -1;
 
         const user = await User.findById(req.user , 'chats').populate({
             path: 'chats',
