@@ -140,6 +140,9 @@ router.get(
 
     asyncHandler( async(req,res) => {
 
+        var sort = {};
+        sort['chats.time'] = -1;
+
         const user = await User.findById(req.user , 'chats').populate({
             path: 'chats',
             populate: {
@@ -154,7 +157,7 @@ router.get(
                 select: 'username profilepic',
                 model: 'User'
             }
-        }).sort('chats.time',-1)
+        }).sort(sort);
 
         res.json(user);
 
