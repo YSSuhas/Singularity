@@ -146,11 +146,6 @@ router.get(
                 path: 'usera',
                 select: 'username profilepic',
                 model: 'User'
-            },
-            populate: {
-                path: 'userb',
-                select: 'username profilepic',
-                model: 'User'
             }
         })
 
