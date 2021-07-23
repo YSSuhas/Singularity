@@ -159,10 +159,7 @@ router.get(
             }
         }).populate({
             path: 'chats',
-            populate: {
-                path: 'chats',
-                options: { sort: { updatedAt: -1 } }
-            }
+            options: { sort: { updatedAt: -1 } }
         });
 
         res.json(user);
