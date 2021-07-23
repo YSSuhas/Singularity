@@ -29,6 +29,7 @@ export const addchatAction = ( chatwith , from , to , message ) => async( dispat
             { chatwith , from , to , message },
             config
         )
+        console.log(data);
 
         dispatch({
             type: ADD_CHAT_SUCCESS,

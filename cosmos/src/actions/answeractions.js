@@ -29,7 +29,7 @@ export const addanswerAction = ( solution , questionid ) => async(dispatch,getSt
         }
 
         const { data } = await axios.post(
-            '/api/answers/',
+            '/api/answers/answer',
             { solution , questionid },
             config
         )

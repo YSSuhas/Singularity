@@ -13,7 +13,7 @@ router.use(bodyParser.urlencoded({extended: true}));
 //Answer a question
 router.post(
 
-    '/',
+    '/answer',
     protect,
 
     asyncHandler( async(req,res) => {
