@@ -147,7 +147,7 @@ router.get(
             path: 'chats',
             populate: {
                 path: 'chats',
-                options: { sort: { updatedAt: -1 } }
+                options: { sort: { time: -1 } }
             }
         }).populate({
             path: 'chats',
