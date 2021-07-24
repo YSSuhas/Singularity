@@ -13,6 +13,28 @@
     margin-bottom: 80px;
 }
 
+.chat > .chatc > .chatcf {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    border-bottom: solid #111111;
+}
+
+.chat > .chatc > .chatcf > .chatcfu {
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+.chat > .chatc > .chatcf > .chatcfu:hover {
+    cursor: pointer;
+}
+
+.chat > .chatc > .chatcf > img {
+    height: 5vh;
+    width: 5vh;
+    border-radius: 50%;
+}
+
 .chat > .chattc {
     position: fixed;
     bottom: 15px;

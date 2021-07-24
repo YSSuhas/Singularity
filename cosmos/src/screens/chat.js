@@ -5,6 +5,9 @@ import './chat.css'
 import axios from 'axios'
 import Chats from '../components/chats';
 import Typechat from '../components/typechat';
+import { useDispatch, useSelector } from 'react-redux';
+import { viewprofilebyidAction } from '../actions/useractions';
+import { LinkContainer } from 'react-router-bootstrap';
 
 function Chat({ match }) {
 
@@ -14,12 +17,17 @@ function Chat({ match }) {
 
     const { REACT_APP_PUSHERApi , REACT_APP_PUSHERCluster , REACT_APP_PUSHERChannel } = process.env;
 
+    const dispatch = useDispatch();
+
+    const viewprofilebyid = useSelector( state => state.viewprofilebyid );
+    const { loading , error , viewProfileById } = viewprofilebyid;
+
     var username , profilepic;
 
     useEffect(() => {
       
       document.title = "Chat > SINGULARITY"
-
+      dispatch( viewprofilebyidAction(match.params.id) );
       const seechats = async() => {
       
         try {
@@ -34,15 +42,6 @@ function Chat({ match }) {
             `/api/chats/${match.params.id}`,
             config
           )
-
-          const { chatwith } = await axios.get(
-            `/api/users/userid/${match.params.id}`,
-            config
-          )
-
-          username = chatwith.username;
-          profilepic = chatwith.profilepic;
-          console.log(username + " " + profilepic);
           
           setChats(data.chat.chats);
 
@@ -98,9 +97,14 @@ function Chat({ match }) {
         <div className="chat">
             <Navbars />
             <div className="chatc">
-              <div>
-                <img src={profilepic}></img>
-              </div>
+                { viewProfileById && 
+                  <div className="chatcf">
+                    <img src={viewProfileById.profilepic}></img>
+                    <LinkContainer className="chatcfu" to={`/${viewProfileById.username}/profile`}>
+                      <h5>{viewProfileById.username}</h5>
+                    </LinkContainer>
+                  </div>
+                }
             { chats.length!=0 ? (
               chats.map(chat => {
 

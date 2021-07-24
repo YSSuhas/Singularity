@@ -7,6 +7,8 @@ function Allchats() {
 
     const user = JSON.parse(localStorage.getItem('userInfo'));
 
+    const [ userchats , setUserchats ] = useState([]);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -25,6 +27,8 @@ function Allchats() {
                     `/api/users/${user.username}/chats`,
                     config
                 )
+                
+                setUserchats(data);
 
             } catch (error) {
                 
@@ -47,7 +51,7 @@ function Allchats() {
           var channel = pusher.subscribe(`${REACT_APP_PUSHERChannel}`);
           channel.bind('updated', function(data) {
             //alert(JSON.stringify(data));
-            setChats([...chats , data.msg]);
+
           });
       
           return () => {

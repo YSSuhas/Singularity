@@ -10,9 +10,11 @@ function Chats({ chat }) {
             { chat.from===user.id ? 
             <div className="chatsyes">
                 <p>{chat.message}</p>
+                <p className="chatst">{chat.time}</p>
             </div> : 
             <div className="chatsno">
                 <p>{chat.message}</p>
+                <p className="chatst">{chat.time}</p>
             </div>
             }
         </div>

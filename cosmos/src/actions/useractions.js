@@ -14,7 +14,10 @@ import {
     UPDATE_PROFILE_FAILURE,
     SEE_USER_CHATS_REQUEST,
     SEE_USER_CHATS_SUCCESS,
-    SEE_USER_CHATS_FAILURE
+    SEE_USER_CHATS_FAILURE,
+    VIEW_PROFILE_BY_ID_REQUEST,
+    VIEW_PROFILE_BY_ID_SUCCESS,
+    VIEW_PROFILE_BY_ID_FAILURE
 } from '../constants/userconstants'
 
 export const registerAction = ( mailid , password , username ) => async(dispatch) => {
@@ -199,6 +202,43 @@ export const seeuserchatsAction = () => async( dispatch , getState ) => {
         
         dispatch({
             type: SEE_USER_CHATS_FAILURE,
+            payload: error.message
+        })
+
+    }
+
+}
+
+export const viewprofilebyidAction = (id) => async(dispatch, getState ) => {
+
+    try {
+        
+        dispatch({
+            type: VIEW_PROFILE_BY_ID_REQUEST
+        })
+
+        const { login: {userInfo} } = getState();
+
+        const config = {
+            headers: {
+                Authorization: `${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios.get(
+            `/api/users/userid/${id}`,
+            config
+        )
+
+        dispatch({
+            type: VIEW_PROFILE_BY_ID_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        
+        dispatch({
+            type: VIEW_PROFILE_BY_ID_FAILURE,
             payload: error.message
         })
 

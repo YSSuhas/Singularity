@@ -6,6 +6,7 @@ import {
     registerReducer,
     seeuserchatsReducer,
     updateprofileReducer,
+    viewprofilebyidReducer,
     viewprofileReducer
 } from './reducers/userreducers'
 import {
@@ -54,7 +55,8 @@ const reducer = combineReducers({
     addchat                      : addchatReducer, 
     seechat                      : seechatReducer,
     searchquestion               : searchquestionReducer,
-    seeuserchats                 : seeuserchatsReducer
+    seeuserchats                 : seeuserchatsReducer,
+    viewprofilebyid              : viewprofilebyidReducer
 })
 
 const middleware = [ thunk ]

@@ -8,8 +8,9 @@
     padding: 3px;
 }
 
-.chatsyes > p {
+.chatsyes {
     margin-left: auto;
+    text-align: right;
     border-radius: 10px;
     height: fit-content;
     width: fit-content;
@@ -19,13 +20,24 @@
     padding: 2vh;
 }
 
-.chatsno > p {
+.chatsno {
     border-radius: 10px;
-    text-align: right;
     height: fit-content;
     width: fit-content;
     resize: none;
     border: none;
     background-color: #111111;
     padding: 2vh;
+}
+
+.chatsyes > p {
+    background-color: transparent;
+}
+
+.chatsno > p {
+    background-color: transparent;
+}
+
+.chatst {
+    font-size: 7px;
 }
