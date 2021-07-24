@@ -14,7 +14,11 @@ function Chat({ match }) {
 
     const { REACT_APP_PUSHERApi , REACT_APP_PUSHERCluster , REACT_APP_PUSHERChannel } = process.env;
 
+    var username , profilepic;
+
     useEffect(() => {
+      
+      document.title = "Chat > SINGULARITY"
 
       const seechats = async() => {
       
@@ -30,8 +34,16 @@ function Chat({ match }) {
             `/api/chats/${match.params.id}`,
             config
           )
-          console.log(data);
 
+          const { chatwith } = await axios.get(
+            `/api/users/userid/${match.params.id}`,
+            config
+          )
+
+          username = chatwith.username;
+          profilepic = chatwith.profilepic;
+          console.log(username + " " + profilepic);
+          
           setChats(data.chat.chats);
 
         } catch (error) {
@@ -51,10 +63,27 @@ function Chat({ match }) {
     });
 
     var channel = pusher.subscribe(`${REACT_APP_PUSHERChannel}`);
+
     channel.bind('updated', function(data) {
-      //alert(JSON.stringify(data));
-      if( ( data.msg.from == user.id && data.msg.to == match.params.id ) || ( data.msg.from == match.params.id && data.msg.to == user.id ) ) {
-        setChats([...chats , data.msg]);
+
+      var from , to;
+      
+      if(chats.length==0) {
+        from = data.msg[0].from;
+        to = data.msg[0].to;
+      }
+      else {
+        from = data.msg.from;
+        to = data.msg.to;
+      }
+
+      if( ( from == user.id && to == match.params.id ) || ( from == match.params.id && to == user.id ) ) {
+        if(chats.length!=0) {
+          setChats([...chats , data.msg]);
+        }
+        else {
+          setChats(data.msg);
+        }
       }
     });
 
@@ -69,7 +98,10 @@ function Chat({ match }) {
         <div className="chat">
             <Navbars />
             <div className="chatc">
-            { chats ? (
+              <div>
+                <img src={profilepic}></img>
+              </div>
+            { chats.length!=0 ? (
               chats.map(chat => {
 
                 return (

@@ -132,6 +132,21 @@ router.get(
 
 )
 
+router.get(
+
+    '/userid/:id',
+    protect,
+
+    asyncHandler( async(req,res) => {
+
+        const user = await User.findById(match.params.id , 'username profilepic');
+
+        res.json(user);
+
+    } )
+
+)
+
 //Get chats of user
 router.get(
 
