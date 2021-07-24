@@ -139,7 +139,7 @@ router.get(
 
     asyncHandler( async(req,res) => {
 
-        const user = await User.findById(match.params.id , 'username profilepic');
+        const user = await User.findById(req.params.id , 'username profilepic');
 
         res.json(user);
 
