@@ -136,7 +136,9 @@ router.get(
         else {
 
             res.json({
-                chat: {}
+                chat: {
+                    chats: [{}]
+                }
             })
 
         }
