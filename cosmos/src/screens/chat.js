@@ -30,6 +30,7 @@ function Chat({ match }) {
             `/api/chats/${match.params.id}`,
             config
           )
+          console.log(data);
 
           setChats(data.chat.chats);
 

@@ -137,7 +137,7 @@ router.get(
 
             res.json({
                 chat: {
-                    chats: [{}]
+                    chats: []
                 }
             })
 
