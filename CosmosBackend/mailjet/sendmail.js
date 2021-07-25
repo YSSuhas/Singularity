@@ -24,7 +24,7 @@ const sendmail = ( mailid , username ) => {
 						],
 						"Subject": "Singularity",
 						"TextPart": `Welcome to Singularity`,
-						"HTMLPart": <div>Dear ${username}, thanks for jumping into Singularity. Post anything related to cosmos here and have fun.</div>
+						"HTMLPart": `<div><p>Dear ${username}, thanks for jumping into Singularity.</p> <p>Post anything related to cosmos here and have fun.</p></div>`
 				}
 		]
 	})
