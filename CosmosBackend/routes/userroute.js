@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 const User = require('../database/schemas/userschema');
 const gettoken = require('../jwtokens/gettoken');
 const bodyParser = require('body-parser');
-const { sendmail } = require('../mailjet/sendmail');
+const sendmail = require('../mailjet/sendmail');
 const { protect } = require('../middleware/authmw');
 
 const router = express.Router();
