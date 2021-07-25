@@ -5,7 +5,7 @@ dotenv.config();
 const mailjet = require ('node-mailjet')
     .connect(process.env.MJ_APIKEY_PUBLIC, process.env.MJ_APIKEY_PRIVATE)
 
-modeule.exports.sendmail = ( mailid , username ) => async( req,res, next ) => {
+module.exports.sendmail = ( mailid , username ) => async( req,res, next ) => {
 
     const request = mailjet
 	.post("send", {'version': 'v3.1'})
@@ -24,7 +24,7 @@ modeule.exports.sendmail = ( mailid , username ) => async( req,res, next ) => {
 						],
 						"Subject": "Singularity",
 						"TextPart": `Welcome to Singularity`,
-						"HTMLPart": `<div><p>Dear ${username}, thanks for jumping into Singularity.</p> <p>Post anything related to cosmos here and have fun.</p><button onClick={ ()=>{ next(); }}>Activate Account</button></div>`
+						"HTMLPart": `<div><p>Dear ${username}, thanks for jumping into Singularity.</p> <p>Post anything related to cosmos here and have fun.</p><button onClick={ ()=> next(); }>Activate Account</button></div>`
 				}
 		]
 	})
