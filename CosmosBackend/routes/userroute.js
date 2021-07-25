@@ -33,25 +33,28 @@ router.post(
 
         sendmail(mailid,username);
 
-        const user = new User({
-            "mailid": mailid,
-            "password": password,
-            "username": username
-        });
-        await user.save();
+        if(activate) {
+            
+            const user = new User({
+                "mailid": mailid,
+                "password": password,
+                "username": username
+            });
+            await user.save();
 
-        if(user) {
-            res.status(201).json({
-                id: user._id,
-                username: user.username,
-                profilepic: user.profilepic,
-                token: gettoken(user._id)
-            })
-        }
+            if(user) {
+                res.status(201).json({
+                    id: user._id,
+                    username: user.username,
+                    profilepic: user.profilepic,
+                    token: gettoken(user._id)
+                })
+            }
 
-        else {
-            res.status(400);
-            throw new Error("Invalid user");
+            else {
+                res.status(400);
+                throw new Error("Invalid user");
+            }
         }
 
     } )
