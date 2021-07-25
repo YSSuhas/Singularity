@@ -9,7 +9,9 @@ const sendmail = ( mailid , username ) => {
 
 	var activate = false;
 
-	const act = () => { activate=true; }
+	function act() {
+		activate=true;
+	}
 
     const request = mailjet
 	.post("send", {'version': 'v3.1'})
@@ -31,7 +33,7 @@ const sendmail = ( mailid , username ) => {
 						"HTMLPart": `<div>
 						<p>Dear ${username}, thanks for jumping into Singularity.</p> 
 						<p>Post anything related to cosmos here and have fun.</p>
-						<button onclick="${act}">Activate Account</button>
+						<button onclick="${act()}">Activate Account</button>
 						</div>`
 				}
 		]
