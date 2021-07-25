@@ -30,6 +30,7 @@ function Navbars() {
                     <Nav className="mr-auto">
                         <Nav.Link href="/picture_of_the_day" className="navlink">POTD</Nav.Link>
                         <Nav.Link href="/questions" className="navlink">QNA</Nav.Link>
+                        <Nav.Link href="/chats" className="navlink">CHATS</Nav.Link>
                     </Nav>
                     { user ? (
                         <Nav className="navbaru">

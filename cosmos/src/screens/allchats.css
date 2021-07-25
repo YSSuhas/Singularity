@@ -1,0 +1,51 @@
+.allchats {
+    margin-top: 15vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.allchats > .allchatsc {
+    border: #111111 solid;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.allchats > .allchatsc > .allchatscf {
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+.allchats > .allchatsc > .allchatscf:hover {
+    cursor: pointer;
+}
+
+.allchats > .allchatsc > img {
+    height: 5vh;
+    width: 5vh;
+    border-radius: 50%;
+}
+
+.allchatscfy {
+    margin-left: auto;
+    text-align: right;
+    border-radius: 10px;
+    height: fit-content;
+    width: fit-content;
+    resize: none;
+    border: none;
+    background-color: #222222;
+    padding: 2vh;
+}
+
+.allchatscfn {
+    border-radius: 10px;
+    height: fit-content;
+    width: fit-content;
+    resize: none;
+    border: none;
+    background-color: #111111;
+    padding: 2vh;
+}

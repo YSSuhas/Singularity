@@ -22,8 +22,6 @@ function Chat({ match }) {
     const viewprofilebyid = useSelector( state => state.viewprofilebyid );
     const { loading , error , viewProfileById } = viewprofilebyid;
 
-    var username , profilepic;
-
     useEffect(() => {
       
       document.title = "Chat > SINGULARITY"

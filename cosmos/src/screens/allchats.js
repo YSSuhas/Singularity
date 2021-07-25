@@ -1,73 +1,59 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState , useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { seeuserchatsAction } from '../actions/useractions';
 import Navbars from '../components/navbar'
 import './allchats.css'
+import {LinkContainer} from 'react-router-bootstrap'
 
 function Allchats() {
 
     const user = JSON.parse(localStorage.getItem('userInfo'));
 
-    const [ userchats , setUserchats ] = useState([]);
+    const seeuserchats = useSelector( state => state.seeuserchats );
+    const { loading , error , seeUserChats } = seeuserchats;
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-
-        const seeuserchats = async() => {
-
-            try {
-                
-                const config = {
-                    headers: {
-                        Authorization: `${user.token}`
-                    }
-                }
-        
-                const { data } = await axios.get(
-                    `/api/users/${user.username}/chats`,
-                    config
-                )
-                
-                setUserchats(data);
-
-            } catch (error) {
-                
-                alert('An error occured');
-
-            }
-
-        }
-
-        seeuserchats();
-
-    })
-
-    useEffect(() => {
-
-        const pusher = new Pusher(`${REACT_APP_PUSHERApi}`, {
-            cluster: `${REACT_APP_PUSHERCluster}`
-          });
-      
-          var channel = pusher.subscribe(`${REACT_APP_PUSHERChannel}`);
-          channel.bind('updated', function(data) {
-            //alert(JSON.stringify(data));
-
-          });
-      
-          return () => {
-            channel.unbind_all();
-            channel.unsubscribe();
-          };
-
-    })
-
+    useEffect( () => {
+        dispatch(seeuserchatsAction());
+    } , [ dispatch ])
+console.log(seeUserChats);
     return (
         <div className="allchats">
             <Navbars />
-            <div>
-            { 
+            { seeUserChats && seeUserChats.chats.map( userchat => {
+
+                var username , profilepic , userid ;
+
+                if(userchat.usera._id==user.id) {
+                    username = userchat.userb.username;
+                    profilepic = userchat.userb.profilepic;
+                    userid = userchat.userb._id;
+                }
+
+                else if(userchat.userb._id==user.id) {
+                    username = userchat.usera.username;
+                    profilepic = userchat.usera.profilepic;
+                    userid = userchat.usera._id;
+                }
+                
+                var msg = userchat.chats[userchat.chats.length-1].message;
+                var msgfrom = userchat.chats[userchat.chats.length-1].from == user.id ;
+
+                return (
+                    <div className="allchatsc">
+                        <img src={profilepic}></img>
+                        <div className="allchatscf">
+                            <LinkContainer to={`/chat/${userid}`}>
+                                <h5>{username}</h5>
+                            </LinkContainer>
+                            { msgfrom ? <p className="allchatscfy">{msg}</p> : <p className="allchatscfn">{msg}</p> }
+                        </div>
+                    </div>
+                )
+
+            } )
             }
-            </div>
         </div>
     )
 }

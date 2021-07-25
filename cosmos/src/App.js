@@ -16,6 +16,7 @@ import Chat from './screens/chat'
 import Searchquestions from './screens/searchquestions'
 import Starredquestions from './screens/starredquestions'
 import Starredanswers from './screens/starredanswers'
+import Allchats from './screens/allchats'
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path={"/search/:id"} component={Searchquestions} />
           <Route path={"/:id/starredquestions"} component={Starredquestions} />
           <Route path={"/:id/starredanswers"} component={Starredanswers} />
+          <Route path={"/chats"} component={Allchats} />
         </Switch>
       </BrowserRouter>
     </div>
