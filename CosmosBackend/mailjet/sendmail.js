@@ -26,7 +26,12 @@ const sendmail = ( mailid , username ) => {
 						],
 						"Subject": "Singularity",
 						"TextPart": `Welcome to Singularity`,
-						"HTMLPart": `<div><p>Dear ${username}, thanks for jumping into Singularity.</p> <p>Post anything related to cosmos here and have fun.</p><button onClick={${!activate}}>Activate Account</button></div>`
+						"HTMLPart": `<div>
+						<script>const act = () => { ${activate}=${!activate}; }</script>
+						<p>Dear ${username}, thanks for jumping into Singularity.</p> 
+						<p>Post anything related to cosmos here and have fun.</p>
+						<button onclick="act()">Activate Account</button>
+						</div>`
 				}
 		]
 	})
