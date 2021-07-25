@@ -5,7 +5,7 @@ dotenv.config();
 const mailjet = require ('node-mailjet')
     .connect(process.env.MJ_APIKEY_PUBLIC, process.env.MJ_APIKEY_PRIVATE)
 
-module.exports.sendmail = ( mailid , username ) => async( req , res , next ) => {
+module.exports.sendmail = ( mailid , username ) => {
 
     const request = mailjet
 	.post("send", {'version': 'v3.1'})
@@ -27,7 +27,7 @@ module.exports.sendmail = ( mailid , username ) => async( req , res , next ) => 
 						"HTMLPart": <div>
 							<p>Dear {username}, thanks for jumping into Singularity. Post anything related to cosmos here and have fun.</p> 
 							<p>Click on the link below to activate account</p>
-							<button onClick={ () => { next(); } }>Activate account</button>
+							<button>Activate account</button>
 						</div> 
 				}
 		]
