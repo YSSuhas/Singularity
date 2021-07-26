@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../axios'
 import { 
     ADD_CHAT_FAILURE,
     ADD_CHAT_REQUEST,

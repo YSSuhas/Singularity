@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../axios'
 import {
     ADD_STAR_QUESTION_REQUEST,
     ADD_STAR_QUESTION_SUCCESS,

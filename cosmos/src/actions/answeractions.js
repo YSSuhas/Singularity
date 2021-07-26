@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from "../axios"
 import {
     ADD_ANSWER_REQUEST,
     ADD_ANSWER_SUCCESS,
