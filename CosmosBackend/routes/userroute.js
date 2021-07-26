@@ -207,7 +207,7 @@ router.put(
             res.json({
                 id: updateUser._id,
                 username: updateUser.username,
-                profilepic: updatedUser.profilepic,
+                profilepic: updateUser.profilepic,
                 token: gettoken(updateUser._id)
             })
         
