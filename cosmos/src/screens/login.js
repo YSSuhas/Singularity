@@ -2,13 +2,14 @@ import React , { useState , useEffect } from 'react'
 import { loginAction } from '../actions/useractions'
 import { useDispatch , useSelector } from 'react-redux'
 import './login.css'
+import {LinkContainer} from 'react-router-bootstrap'
 
 function Login({ history }) {
 
     const [ mailid , setMailid ] = useState('');
     const [ password , setPassword ] = useState('');
 
-    const redirect = '/';
+    const redirect = '/register';
 
     const dispatch = useDispatch();
 
@@ -20,7 +21,7 @@ function Login({ history }) {
             history.push("/");
         }
         document.title = "Login > SINGULARITY"
-    } , [ userInfo , history , dispatch] )
+    } , [ userInfo , history , dispatch ] )
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -38,6 +39,7 @@ function Login({ history }) {
                 <input className="loginfi" placeholder="PA$$w0rd" type="password" value={password} onChange={ (e) => setPassword(e.target.value) }></input>
                 <h1></h1>
                 <button className="loginfb" type="submit">Get In</button>
+                <div className="loginf"><p>New to Singlarity???</p><p>Click here to register</p><LinkContainer to={redirect}><h6>Register</h6></LinkContainer></div>
             </form>
         </div>
     )

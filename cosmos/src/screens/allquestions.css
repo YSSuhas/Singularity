@@ -26,3 +26,7 @@
     justify-content: space-between;
     margin-bottom: 5vh;
 }
+
+.allquestionsh:hover {
+    cursor: pointer;
+}

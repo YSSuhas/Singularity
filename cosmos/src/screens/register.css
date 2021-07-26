@@ -88,3 +88,25 @@
 .register > .registerm {
     margin-left: 50vh;
 }
+
+.register > form > .registerf {
+    display: flex;
+    background-color: transparent;
+    transform: translate(5% , 100%);
+}
+
+.register > form > .registerf > p {
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: transparent;
+}
+
+.register > form > .registerf > h6 {
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: transparent;
+}
+
+.register > form > .registerf > h6:hover {
+    cursor: pointer;
+}

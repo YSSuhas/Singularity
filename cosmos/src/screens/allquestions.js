@@ -57,7 +57,7 @@ function Allquestions( { history } ) {
                             <h6>{question.user.username}</h6>
                             <p>{date}</p>
                         </div>
-                        <LinkContainer to={`/questions/${question._id}`}>
+                        <LinkContainer className="allquestionsh" to={`/questions/${question._id}`}>
                             <h5>{problem}</h5>
                         </LinkContainer>
                     </div>

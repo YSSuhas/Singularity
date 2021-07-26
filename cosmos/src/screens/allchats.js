@@ -5,7 +5,7 @@ import Navbars from '../components/navbar'
 import './allchats.css'
 import {LinkContainer} from 'react-router-bootstrap'
 
-function Allchats() {
+function Allchats({ history }) {
 
     const user = JSON.parse(localStorage.getItem('userInfo'));
 
@@ -15,9 +15,13 @@ function Allchats() {
     const dispatch = useDispatch();
 
     useEffect( () => {
+        if(!(localStorage.getItem('userInfo'))) {
+            history.push('/login');
+        }
+        document.title = "Chats > SINGULARITY";
         dispatch(seeuserchatsAction());
     } , [ dispatch ])
-console.log(seeUserChats);
+
     return (
         <div className="allchats">
             <Navbars />

@@ -20,6 +20,7 @@ function Searchquestions({ match }) {
     return (
         <div className="searchquestions">
             <Navbars />
+            <h4>Questions</h4>
             { searchQuestion && searchQuestion.questions.map(question => {
 
                 if(question.statement.length>100) {
@@ -49,17 +50,18 @@ function Searchquestions({ match }) {
                 )
 
             })}
+            <h4>Users</h4>
             { searchQuestion && searchQuestion.users.map(user => {
 
                 return (
 
                     <div className="searchquestionsq">
-                        <div className="searchquestionsqf">
+                        <div className="searchquestionsqu">
                             <img src={user.profilepic} />
-                        </div>
-                        <LinkContainer to={`/questions/${question._id}`}>
+                        <LinkContainer to={`/${user.username}/profile`}>
                             <h5>{user.username}</h5>
                         </LinkContainer>
+                        </div>
                     </div>
 
                 )

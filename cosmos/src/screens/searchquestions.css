@@ -5,6 +5,12 @@
     width: 80%;
 }
 
+.searchquestions > h4 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
 .searchquestions > .searchquestionsq {
     border: #111111 solid;
     border-radius: 10px;
@@ -15,6 +21,27 @@
 .searchquestions > .searchquestionsq > .searchquestionsqf {
     display: flex;
     justify-content: space-between;
+}
+
+.searchquestions > .searchquestionsq > .searchquestionsqu {
+    display: flex;
+    padding: 5px;
+}
+
+.searchquestions > .searchquestionsq > .searchquestionsqu > img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-left: 30px;
+}
+
+.searchquestions > .searchquestionsq > .searchquestionsqu > h5 {
+    margin-top: 10px;
+    margin-left: 40px;
+}
+
+.searchquestions > .searchquestionsq > .searchquestionsqu > h5:hover {
+    cursor: pointer;
 }
 
 .searchquestions > .searchquestionsq > .searchquestionsqf > p {

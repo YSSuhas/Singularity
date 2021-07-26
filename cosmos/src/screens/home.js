@@ -16,20 +16,23 @@ function Home({ history }) {
     return (
         <div className="home">
             <Navbars />
-            <div className="homef">
-                <div className="homeff" onClick={()=>submitHandler('/ask_question')}>
-                    <h5>Ask Questions</h5>
+            <img src="https://ik.imagekit.io/yssuhas/Singularity/Home_2xlicQCJk.jpg?updatedAt=1627291868966"></img>
+            <div className="homei">
+                <div className="homef">
+                    <div className="homeff1" onClick={()=>submitHandler('/ask_question')}>
+                        <h5>Ask Questions</h5>
+                    </div>
+                    <div className="homeff2" onClick={()=>submitHandler('/questions')}>
+                        <h5>Answer Questions</h5>
+                    </div>
                 </div>
-                <div className="homeff" onClick={()=>submitHandler('/questions')}>
-                    <h5>Answer Questions</h5>
-                </div>
-            </div>
-            <div className="homef">
-                <div className="homeff">
-                    <h5>Chat with others</h5>
-                </div>
-                <div className="homeff" onClick={()=>submitHandler('/picture_of_the_day')}>
-                    <h5>View Picture of the Day</h5>
+                <div className="homefi">
+                    <div className="homeff1" onClick={()=>submitHandler('/chats')}>
+                        <h5>Chat with others</h5>
+                    </div>
+                    <div className="homeff2" onClick={()=>submitHandler('/picture_of_the_day')}>
+                        <h5>View Picture of the Day</h5>
+                    </div>
                 </div>
             </div>
             <Footer />

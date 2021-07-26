@@ -3,6 +3,7 @@ import './register.css'
 import { registerAction } from '../actions/useractions'
 import { useSelector , useDispatch } from 'react-redux'
 import Message from '../components/message'
+import {LinkContainer} from 'react-router-bootstrap'
 
 function Register( { history } ) {
 
@@ -13,7 +14,7 @@ function Register( { history } ) {
     const [ alertmistake , setAlertmistake ] = useState(false);
     const [ message , setMessage ] = useState('');
 
-    const redirect = '/';
+    const redirect = '/login';
 
     const dispatch = useDispatch();
 
@@ -84,6 +85,7 @@ function Register( { history } ) {
                 </div>
                 <h1></h1>
                 <button className="registerfb" type="submit">Get In</button>
+                <div className="registerf"><p>Have an account already???</p><p>Click here to Login</p><LinkContainer to={redirect}><h6>Login</h6></LinkContainer></div>
             </form>
             <div className="registerm">
                 { alertmistake && <Message type="error" message={message}></Message> }

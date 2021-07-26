@@ -56,3 +56,25 @@
     padding: 15px;
     margin-left: 13vh;
 }
+
+.login > form > .loginf {
+    display: flex;
+    background-color: transparent;
+    transform: translate(5% , 100%);
+}
+
+.login > form > .loginf > p {
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: transparent;
+}
+
+.login > form > .loginf > h6 {
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: transparent;
+}
+
+.login > form > .loginf > h6:hover {
+    cursor: pointer;
+}

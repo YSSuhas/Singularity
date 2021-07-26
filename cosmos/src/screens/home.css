@@ -5,19 +5,74 @@
     width: 80%;
 }
 
-.home > .homef {
+.homef {
     display: flex;
-    justify-content: space-around;
     margin-top: 20vh;
     margin-bottom: 20vh;
+    background: transparent;
 }
 
-.home > .homef > .homeff {
+.homefi {
+    display: flex;
+    margin-top: 20vh;
+    margin-bottom: 20vh;
+    background: transparent;
+}
+
+.homeff1 {
     border: #111111 solid;
     border-radius: 10px;
     padding: 20px;
+    background: transparent;
+    transform: translate(-25%);
 }
 
-.home > .homef > .homeff:hover {
+.homeff1 > h5 {
+    background: transparent;
+}
+
+.homef > .homeff1:hover {
     cursor: pointer;
+}
+
+.homeff2 {
+    border: #111111 solid;
+    border-radius: 10px;
+    padding: 20px;
+    background: transparent;
+    transform: translate(100%);
+}
+
+.homef > .homeff2 {
+    transform: translate(150%);
+}
+
+.homeff2 > h5 {
+    background: transparent;
+}
+
+.homef > .homeff2:hover {
+    cursor: pointer;
+}
+
+.homefi:hover {
+    cursor: pointer;
+}
+
+.home > img {
+    display: block;
+    margin-top: 10vh;
+    margin-left: auto;
+    margin-right: auto;
+    height: 70vh;
+    border-radius: 10px;
+}
+
+.home > .homei {
+    background: transparent;
+    padding: 1vh;
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    transform: translate(-10%, -10%);
 }

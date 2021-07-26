@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { viewprofilebyidAction } from '../actions/useractions';
 import { LinkContainer } from 'react-router-bootstrap';
 
-function Chat({ match }) {
+function Chat({ history , match }) {
 
     const [ chats , setChats ] = useState([]);
 
@@ -24,6 +24,9 @@ function Chat({ match }) {
 
     useEffect(() => {
       
+      if(!(localStorage.getItem('userInfo'))) {
+        history.push('/login');
+      }
       document.title = "Chat > SINGULARITY"
       dispatch( viewprofilebyidAction(match.params.id) );
       const seechats = async() => {
