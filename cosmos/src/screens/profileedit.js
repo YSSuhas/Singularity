@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 import React , { useState , useEffect } from 'react'
 import './profileedit.css'
 import { useDispatch, useSelector } from 'react-redux';

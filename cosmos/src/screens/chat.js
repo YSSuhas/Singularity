@@ -2,7 +2,7 @@ import React , { useState , useEffect } from 'react'
 import Pusher from 'pusher-js'
 import Navbars from '../components/navbar';
 import './chat.css'
-import axios from 'axios'
+import axios from '../axios'
 import Chats from '../components/chats';
 import Typechat from '../components/typechat';
 import { useDispatch, useSelector } from 'react-redux';
