@@ -218,7 +218,7 @@ export const searchquestionAction = ( text ) => async( dispatch ) => {
         }
 
         const { data } = await axios.get(
-            `/api/questions/search/${text}`,
+            `/api/search/${text}`,
             config
         )
 
