@@ -50,7 +50,7 @@ export const registerAction = ( mailid , password , username ) => async(dispatch
 
         dispatch({
             type: REGISTER_FAILURE,
-            payload: error.response.data.message
+            payload: error.message
         })
 
     }
